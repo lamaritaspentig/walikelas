@@ -141,9 +141,6 @@
                 <button onclick="switchManajemenTab('rekap')" id="manajemen-nav-btn-rekap" class="py-2 sm:py-3 border-b-2 border-transparent hover:text-white font-bold flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-chart-pie"></i> Rekapitulasi Per Kelas (33 Kelas)
                 </button>
-                <button onclick="switchManajemenTab('stok')" id="manajemen-nav-btn-stok" class="py-2 sm:py-3 border-b-2 border-transparent hover:text-white font-bold flex items-center gap-2 whitespace-nowrap">
-                    <i class="fa-solid fa-boxes-stacked"></i> Kelola Stok Voucher
-                </button>
             </div>
 
             <button onclick="lockManajemen()" class="py-1.5 px-3 bg-red-500/20 hover:bg-red-500/30 text-red-300 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition border border-red-500/30">
@@ -176,9 +173,14 @@
                     </h2>
                     <p class="text-xs text-slate-400">Verifikasi Pembayaran & Penyerahan Voucher Fisik Siswa Kelas Anda</p>
                 </div>
-                <span class="text-[11px] font-black bg-slate-800 text-emerald-400 px-3 py-1 rounded-full border border-slate-700 font-mono self-start sm:self-auto">
-                    Ref: <span id="active-ref-code-banner">WK-VII1</span>
-                </span>
+                <div class="flex items-center gap-2 self-start sm:self-auto">
+                    <span class="text-[10px] font-bold bg-emerald-500/20 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/30 flex items-center gap-1.5 animate-pulse">
+                        <i class="fa-solid fa-rotate text-[9px]"></i> Auto Sync Active
+                    </span>
+                    <span class="text-[11px] font-black bg-slate-800 text-emerald-400 px-3 py-1 rounded-full border border-slate-700 font-mono">
+                        Ref: <span id="active-ref-code-banner">WK-VII1</span>
+                    </span>
+                </div>
             </div>
 
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -190,13 +192,13 @@
 
                 <div class="bg-slate-800/80 p-3.5 rounded-2xl border border-slate-700/80 space-y-1">
                     <p class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Total Voucher</p>
-                    <p id="stat-wali-vouchers-total" class="text-lg font-black text-blue-400">0 Lembar</p>
+                    <p id="stat-wali-vouchers-total" class="text-lg font-black text-blue-400">0</p>
                     <p class="text-[10px] text-slate-400 font-bold">Dipesan Siswa Kelas</p>
                 </div>
 
                 <div class="bg-slate-800/80 p-3.5 rounded-2xl border border-slate-700/80 space-y-1">
                     <p class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Siap Diserahkan</p>
-                    <p id="stat-wali-unredeemed" class="text-lg font-black text-amber-400">0 Lembar</p>
+                    <p id="stat-wali-unredeemed" class="text-lg font-black text-amber-400">0</p>
                     <p class="text-[10px] text-slate-400 font-bold">Perlu Diserahkan ke Siswa</p>
                 </div>
 
@@ -215,7 +217,7 @@
                     <h2 class="font-black text-base sm:text-lg tracking-tight flex items-center gap-2">
                         <i class="fa-solid fa-school-flag text-purple-400"></i> Master Dashboard Manajemen Kantin Sekolah
                     </h2>
-                    <p class="text-xs text-purple-300/80">Pengawasan Laporan Transaksi & Stok Voucher Seluruh Kelas (UPT SPF SMPN 3 Makassar)</p>
+                    <p class="text-xs text-purple-300/80">Pengawasan Laporan Transaksi Seluruh Kelas (UPT SPF SMPN 3 Makassar)</p>
                 </div>
                 <span class="text-[11px] font-extrabold bg-purple-900/80 text-purple-300 px-3 py-1 rounded-full border border-purple-700/80 self-start sm:self-auto flex items-center gap-1.5">
                     <i class="fa-solid fa-user-shield text-purple-400"></i> Mode Super Admin
@@ -231,13 +233,13 @@
 
                 <div class="bg-purple-900/40 p-3.5 rounded-2xl border border-purple-700/50 space-y-1">
                     <p class="text-[10px] font-black uppercase text-purple-300 tracking-wider">Total Voucher</p>
-                    <p id="stat-master-vouchers-total" class="text-lg sm:text-xl font-black text-blue-400">0 Lembar</p>
+                    <p id="stat-master-vouchers-total" class="text-lg sm:text-xl font-black text-blue-400">0</p>
                     <p class="text-[10px] text-purple-300/80 font-bold">Terjual Seluruh Kelas</p>
                 </div>
 
                 <div class="bg-purple-900/40 p-3.5 rounded-2xl border border-purple-700/50 space-y-1">
                     <p class="text-[10px] font-black uppercase text-purple-300 tracking-wider">Belum Diserahkan</p>
-                    <p id="stat-master-unredeemed" class="text-lg sm:text-xl font-black text-amber-400">0 Lembar</p>
+                    <p id="stat-master-unredeemed" class="text-lg sm:text-xl font-black text-amber-400">0</p>
                     <p class="text-[10px] text-purple-300/80 font-bold">Menunggu Wali Kelas</p>
                 </div>
 
@@ -256,7 +258,7 @@
                     <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
                         <i class="fa-solid fa-store text-emerald-600"></i> Pilih Nominal Voucher Kantin
                     </h2>
-                    <p class="text-xs text-slate-500">Pilih lembar voucher yang ingin dibeli, lalu selesaikan di keranjang</p>
+                    <p class="text-xs text-slate-500">Stok ditarik secara langsung dari server Apps Script Kantin</p>
                 </div>
 
                 <div class="flex gap-1.5 overflow-x-auto no-scrollbar w-full sm:w-auto">
@@ -493,22 +495,6 @@
             </div>
         </section>
 
-        <!-- VIEW: MANAJEMEN KELOLA STOK VOUCHER -->
-        <section id="view-manajemen-stok" class="hidden space-y-4">
-            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-5">
-                <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                    <div>
-                        <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-boxes-stacked text-purple-600"></i> Kelola Stok Voucher Kantin
-                        </h2>
-                        <p class="text-xs text-slate-500">Atur ketersediaan stok voucher fisik secara terpusat</p>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="master-stock-grid"></div>
-            </div>
-        </section>
-
     </main>
 
     <!-- MODAL: QRIS CHECKOUT -->
@@ -544,7 +530,7 @@
         </div>
     </div>
 
-    <!-- MODAL: WALI KELAS LOGIN (Cleaned - No Demo Hints) -->
+    <!-- MODAL: WALI KELAS LOGIN -->
     <div id="modal-walikelas-pin" onclick="if(event.target === this) closeWaliKelasPinModal(event)" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-xs w-full p-6 shadow-2xl space-y-4 border border-slate-100 text-center relative">
             <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-xl mx-auto shadow-md">
@@ -561,9 +547,14 @@
                     <input type="text" id="input-walikelas-ref" placeholder="WK-VII1" class="w-full text-center uppercase tracking-wider text-xs font-black py-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
                 </div>
 
-                <div class="space-y-1 text-left">
+                <div class="space-y-1 text-left relative">
                     <label class="block text-[11px] font-extrabold text-slate-700">PIN Keamanan Wali Kelas</label>
-                    <input type="password" id="input-walikelas-pin" maxlength="10" placeholder="Masukkan PIN" class="w-full text-center tracking-widest text-base font-bold py-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                    <div class="relative">
+                        <input type="password" id="input-walikelas-pin" maxlength="20" placeholder="Masukkan PIN" class="w-full text-center tracking-widest text-base font-bold py-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 pr-10">
+                        <button type="button" onclick="togglePinVisibility('input-walikelas-pin', 'toggle-wali-icon')" class="absolute right-3 top-3 text-slate-400 hover:text-slate-600">
+                            <i id="toggle-wali-icon" class="fa-solid fa-eye text-xs"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <p id="walikelas-pin-error-msg" class="text-[11px] text-red-500 font-bold hidden">Kode Referal atau PIN Salah!</p>
@@ -580,7 +571,7 @@
         </div>
     </div>
 
-    <!-- MODAL: MANAJEMEN LOGIN (Cleaned - No Demo Hints) -->
+    <!-- MODAL: MANAJEMEN LOGIN -->
     <div id="modal-manajemen-pin" onclick="if(event.target === this) closeManajemenPinModal(event)" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-xs w-full p-6 shadow-2xl space-y-4 border border-slate-100 text-center relative">
             <div class="w-12 h-12 rounded-2xl bg-purple-950 text-white flex items-center justify-center text-xl mx-auto shadow-md">
@@ -592,9 +583,14 @@
             </div>
             
             <form onsubmit="verifyManajemenPin(event)" class="space-y-3">
-                <div class="space-y-2 text-left relative">
+                <div class="space-y-1 text-left relative">
                     <label class="block text-[11px] font-extrabold text-slate-700">PIN Keamanan Master</label>
-                    <input type="password" id="input-manajemen-pin" maxlength="20" placeholder="Masukkan PIN Master" class="w-full text-center tracking-widest text-base font-bold py-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-purple-500">
+                    <div class="relative">
+                        <input type="password" id="input-manajemen-pin" maxlength="20" placeholder="Masukkan PIN Master" class="w-full text-center tracking-widest text-base font-bold py-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-purple-500 pr-10">
+                        <button type="button" onclick="togglePinVisibility('input-manajemen-pin', 'toggle-man-icon')" class="absolute right-3 top-3 text-slate-400 hover:text-slate-600">
+                            <i id="toggle-man-icon" class="fa-solid fa-eye text-xs"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <p id="manajemen-pin-error-msg" class="text-[11px] text-red-500 font-bold hidden">PIN Master Salah!</p>
@@ -615,71 +611,79 @@
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
     <script>
-        // =========================================================================
-        // 🛍️ PRODUCTION STATE MANAGEMENT & LIVE GAS SYNC
-        // =========================================================================
-        // ⚠️ MASUKKAN / TEMPELKAN URL WEB APP GOOGLE APPS SCRIPT ANDA DI SINI:
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz4RBr6vZMu54SfI6HPWi9HXkcZJmmd1tnXbwLvgjFiq2SQHDeV577GrlW1Ce8tRFeD/exec";
+        // URL Google Apps Script Web App (Tempelkan URL Web App Anda di sini)
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsa5-1VhxJFFTAK2epKS5UsmttLyuCDEc_9TnUR-aoDIHpACliiQuXZEjgxDO_1gV9aA/exec";
 
+        // Global Application State
         let currentRole = 'siswa';
+        let activeCategoryFilter = 'all';
+
         let isWaliKelasUnlocked = false;
+        let activeWaliKelasRefCode = 'WK-VII1';
+        let activeClassName = 'Kelas VII.1';
+        let waliAutoRefreshInterval = null;
+
         let isManajemenUnlocked = false;
 
         let cart = [];
         let orders = [];
-        let activeCategoryFilter = 'all';
-        let activeWaliKelasRefCode = 'WK-VII1';
-        let activeClassName = 'Kelas VII.1';
 
+        // Katalog Voucher Default (stok: null mewakili stok yang belum ditarik dari Apps Script)
         let menuItems = [
-            { id: 'vch-1000', name: 'Voucher Belanja', price: 1000, stock: 0, category: 'kecil', icon: '🎟️', borderClass: 'border-amber-200 bg-amber-50/30', textBrandClass: 'text-amber-700', priceClass: 'text-amber-600', btnClass: 'bg-amber-500 hover:bg-amber-600 text-white shadow-amber-500/20' },
-            { id: 'vch-2000', name: 'Voucher Belanja', price: 2000, stock: 0, category: 'kecil', icon: '🎟️', borderClass: 'border-orange-200 bg-orange-50/30', textBrandClass: 'text-orange-700', priceClass: 'text-orange-600', btnClass: 'bg-orange-500 hover:bg-orange-600 text-white shadow-orange-500/20' },
-            { id: 'vch-3000', name: 'Voucher Belanja', price: 3000, stock: 0, category: 'kecil', icon: '🎟️', borderClass: 'border-emerald-200 bg-emerald-50/30', textBrandClass: 'text-emerald-700', priceClass: 'text-emerald-600', btnClass: 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-emerald-500/20' },
-            { id: 'vch-5000', name: 'Voucher Belanja', price: 5000, stock: 0, category: 'kecil', icon: '🎟️', borderClass: 'border-blue-200 bg-blue-50/30', textBrandClass: 'text-blue-700', priceClass: 'text-blue-600', btnClass: 'bg-blue-500 hover:bg-blue-600 text-white shadow-blue-500/20' },
-            { id: 'vch-10000', name: 'Voucher Belanja', price: 10000, stock: 0, category: 'besar', icon: '🎟️', borderClass: 'border-purple-200 bg-purple-50/30', textBrandClass: 'text-purple-700', priceClass: 'text-purple-600', btnClass: 'bg-purple-500 hover:bg-purple-600 text-white shadow-purple-500/20' }
+            { id: 'vch-1000', name: 'Voucher Belanja', price: 1000, stock: null, icon: '🎫', category: 'kecil', borderClass: 'border-amber-200 bg-amber-50/20', textBrandClass: 'text-amber-800', priceClass: 'text-amber-700', btnClass: 'bg-amber-600 hover:bg-amber-700 text-white' },
+            { id: 'vch-2000', name: 'Voucher Belanja', price: 2000, stock: null, icon: '🎫', category: 'kecil', borderClass: 'border-orange-200 bg-orange-50/20', textBrandClass: 'text-orange-800', priceClass: 'text-orange-700', btnClass: 'bg-orange-600 hover:bg-orange-700 text-white' },
+            { id: 'vch-3000', name: 'Voucher Belanja', price: 3000, stock: null, icon: '🎫', category: 'kecil', borderClass: 'border-emerald-200 bg-emerald-50/20', textBrandClass: 'text-emerald-800', priceClass: 'text-emerald-700', btnClass: 'bg-emerald-600 hover:bg-emerald-700 text-white' },
+            { id: 'vch-5000', name: 'Voucher Belanja', price: 5000, stock: null, icon: '🎟️', category: 'kecil', borderClass: 'border-blue-200 bg-blue-50/20', textBrandClass: 'text-blue-800', priceClass: 'text-blue-700', btnClass: 'bg-blue-600 hover:bg-blue-700 text-white' },
+            { id: 'vch-10000', name: 'Voucher Belanja', price: 10000, stock: null, icon: '🎟️', category: 'besar', borderClass: 'border-purple-200 bg-purple-50/20', textBrandClass: 'text-purple-800', priceClass: 'text-purple-700', btnClass: 'bg-purple-600 hover:bg-purple-700 text-white' }
         ];
 
-        // Helper Utility Functions
-        function formatRupiah(number) {
-            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(number || 0);
+        function formatRupiah(amount) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount || 0);
         }
 
         function openModal(id) {
-            document.getElementById(id)?.classList.remove('hidden');
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.remove('hidden');
         }
 
         function closeModal(id) {
-            document.getElementById(id)?.classList.add('hidden');
-        }
-
-        function hideAllViews() {
-            ['view-menu', 'view-cart', 'view-vouchers', 'view-walikelas-transactions', 'view-manajemen-transactions', 'view-manajemen-rekap', 'view-manajemen-stok'].forEach(id => {
-                document.getElementById(id)?.classList.add('hidden');
-            });
+            const modal = document.getElementById(id);
+            if (modal) modal.classList.add('hidden');
         }
 
         function showToast(message, type = 'info') {
             const container = document.getElementById('toast-container');
             if (!container) return;
+
             const toast = document.createElement('div');
-            const bgColors = {
-                success: 'bg-emerald-800 text-white border-emerald-700',
-                error: 'bg-red-800 text-white border-red-700',
-                info: 'bg-slate-800 text-white border-slate-700'
-            };
-            toast.className = `px-4 py-3 rounded-2xl shadow-xl text-xs font-bold border pointer-events-auto transition-all transform translate-y-2 opacity-0 flex items-center gap-2 ${bgColors[type] || bgColors.info}`;
-            toast.innerHTML = `<span>${message}</span>`;
+            const bgColor = type === 'success' ? 'bg-emerald-800 text-white' : type === 'error' ? 'bg-red-800 text-white' : 'bg-slate-800 text-white';
+            const icon = type === 'success' ? 'fa-circle-check text-emerald-300' : type === 'error' ? 'fa-circle-xmark text-red-300' : 'fa-circle-info text-blue-300';
+
+            toast.className = `${bgColor} px-4 py-3 rounded-2xl shadow-xl text-xs font-bold flex items-center gap-2.5 transition-all duration-300 pointer-events-auto max-w-xs border border-white/10`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-base"></i><span>${message}</span>`;
+
             container.appendChild(toast);
-            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
+
             setTimeout(() => {
                 toast.classList.add('opacity-0', 'translate-y-2');
                 setTimeout(() => toast.remove(), 300);
             }, 3000);
         }
 
-        // =========================================================================
-        // 📡 LIVE DATA FETCHING FROM GOOGLE SHEETS
-        // =========================================================================
+        function togglePinVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (!input || !icon) return;
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fa-solid fa-eye-slash text-xs text-emerald-600';
+            } else {
+                input.type = 'password';
+                icon.className = 'fa-solid fa-eye text-xs text-slate-400';
+            }
+        }
+
         async function fetchLiveData() {
             if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes("TEMPELKAN_URL")) return;
 
@@ -688,19 +692,21 @@
                 const data = await res.json();
 
                 if (data.status === 'success') {
+                    // Update stok dari Apps Script
                     if (data.stock) {
                         menuItems.forEach(item => {
                             if (data.stock[item.id] !== undefined) {
-                                item.stock = data.stock[item.id];
+                                item.stock = Number(data.stock[item.id]);
                             }
                         });
                     }
 
                     if (data.orders && Array.isArray(data.orders)) {
                         orders = data.orders.map(o => {
+                            const isRedeemed = (o.redeemStatus === 'Sudah Ditukar');
                             return {
                                 ...o,
-                                vouchers: o.vouchers || generateVouchersListFromSummary(o.itemsSummary, o.id)
+                                vouchers: generateVouchersListFromSummary(o.itemsSummary, o.id, isRedeemed)
                             };
                         });
                         localStorage.setItem('saras_orders', JSON.stringify(orders));
@@ -721,7 +727,7 @@
             }
         }
 
-        function generateVouchersListFromSummary(summaryStr, orderId) {
+        function generateVouchersListFromSummary(summaryStr, orderId, isRedeemed = false) {
             const list = [];
             if (!summaryStr) return list;
             const parts = summaryStr.split(',');
@@ -735,7 +741,7 @@
                         name: name || 'Voucher Belanja',
                         price: 0,
                         icon: '🎟️',
-                        redeemed: false
+                        redeemed: isRedeemed
                     });
                 }
             });
@@ -763,6 +769,8 @@
             const siswaNav = document.getElementById('siswa-nav');
             const waliNav = document.getElementById('walikelas-nav');
             const manNav = document.getElementById('manajemen-nav');
+
+            stopWaliAutoRefresh();
 
             if (role === 'siswa') {
                 if (badge) {
@@ -805,6 +813,7 @@
 
                 switchWaliTab('transactions');
                 renderWaliKelasSummary();
+                startWaliAutoRefresh();
             } else if (role === 'manajemen') {
                 if (!isManajemenUnlocked) {
                     openModal('modal-manajemen-pin');
@@ -827,6 +836,22 @@
 
                 switchManajemenTab('transactions');
                 renderMasterSummary();
+            }
+        }
+
+        function startWaliAutoRefresh() {
+            stopWaliAutoRefresh();
+            waliAutoRefreshInterval = setInterval(() => {
+                if (currentRole === 'walikelas' && isWaliKelasUnlocked) {
+                    fetchLiveData();
+                }
+            }, 15000);
+        }
+
+        function stopWaliAutoRefresh() {
+            if (waliAutoRefreshInterval) {
+                clearInterval(waliAutoRefreshInterval);
+                waliAutoRefreshInterval = null;
             }
         }
 
@@ -878,25 +903,11 @@
             }
         }
 
-        function closeWaliKelasPinModal(e) {
-            if (e) e.preventDefault();
-            closeModal('modal-walikelas-pin');
-            if (currentRole === 'walikelas' && !isWaliKelasUnlocked) setRole('siswa');
-        }
-
-        function lockWaliKelas() {
-            isWaliKelasUnlocked = false;
-            const lockIcon = document.getElementById('walikelas-lock-icon');
-            if (lockIcon) lockIcon.className = 'fa-solid fa-lock text-[10px] text-slate-400';
-            showToast('Sesi Wali Kelas Terkunci', 'info');
-            setRole('siswa');
-        }
-
         async function verifyManajemenPin(e) {
             if (e) e.preventDefault();
             const pinInput = document.getElementById('input-manajemen-pin');
             const errorMsg = document.getElementById('manajemen-pin-error-msg');
-            const entered = String(pinInput?.value || '').trim();
+            const enteredPin = String(pinInput?.value || '').trim();
 
             if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes("TEMPELKAN_URL")) {
                 showToast('Harap atur variabel APPS_SCRIPT_URL di dalam file index.html terlebih dahulu!', 'error');
@@ -906,30 +917,53 @@
             try {
                 const res = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
-                    body: JSON.stringify({ action: 'verifyMasterPin', pin: entered })
+                    body: JSON.stringify({ action: 'verifyMasterPin', pin: enteredPin })
                 });
                 const data = await res.json();
 
                 if (data.status === 'success') {
                     isManajemenUnlocked = true;
                     const lockIcon = document.getElementById('manajemen-lock-icon');
-                    if (lockIcon) lockIcon.className = 'fa-solid fa-lock-open text-[10px] text-purple-400';
+                    if (lockIcon) lockIcon.className = 'fa-solid fa-lock-open text-[10px] text-purple-300';
+
                     if (errorMsg) errorMsg.classList.add('hidden');
                     closeModal('modal-manajemen-pin');
-                    showToast('Login Master Admin Manajemen Berhasil! 🛡️', 'success');
+                    showToast('Login Master Manajemen Berhasil! 🛡️', 'success');
                     setRole('manajemen');
                 } else {
-                    if (errorMsg) errorMsg.classList.remove('hidden');
+                    if (errorMsg) {
+                        errorMsg.innerText = data.message || 'PIN Master Salah!';
+                        errorMsg.classList.remove('hidden');
+                    }
                 }
             } catch (err) {
                 showToast('Gagal terhubung ke Google Sheets!', 'error');
             }
         }
 
+        function closeWaliKelasPinModal(e) {
+            if (e) e.preventDefault();
+            const pinInput = document.getElementById('input-walikelas-pin');
+            if (pinInput) pinInput.value = '';
+            closeModal('modal-walikelas-pin');
+            if (currentRole === 'walikelas' && !isWaliKelasUnlocked) setRole('siswa');
+        }
+
         function closeManajemenPinModal(e) {
             if (e) e.preventDefault();
+            const pinInput = document.getElementById('input-manajemen-pin');
+            if (pinInput) pinInput.value = '';
             closeModal('modal-manajemen-pin');
             if (currentRole === 'manajemen' && !isManajemenUnlocked) setRole('siswa');
+        }
+
+        function lockWaliKelas() {
+            isWaliKelasUnlocked = false;
+            stopWaliAutoRefresh();
+            const lockIcon = document.getElementById('walikelas-lock-icon');
+            if (lockIcon) lockIcon.className = 'fa-solid fa-lock text-[10px] text-slate-400';
+            showToast('Sesi Wali Kelas Terkunci', 'info');
+            setRole('siswa');
         }
 
         function lockManajemen() {
@@ -938,6 +972,13 @@
             if (lockIcon) lockIcon.className = 'fa-solid fa-lock text-[10px] text-slate-400';
             showToast('Sesi Manajemen Terkunci', 'info');
             setRole('siswa');
+        }
+
+        function hideAllViews() {
+            ['view-menu', 'view-cart', 'view-vouchers', 'view-walikelas-transactions', 'view-manajemen-transactions', 'view-manajemen-rekap'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
         }
 
         function switchTab(tab) {
@@ -957,6 +998,7 @@
                 const activeBtn = document.getElementById('nav-btn-vouchers');
                 if (activeBtn) activeBtn.className = 'py-2.5 px-3 sm:px-4 rounded-xl text-emerald-700 bg-emerald-50 font-bold flex items-center gap-2 transition';
                 renderMyVouchers();
+                fetchLiveData();
             } else if (tab === 'cart') {
                 document.getElementById('view-cart')?.classList.remove('hidden');
                 const activeBtn = document.getElementById('nav-btn-cart');
@@ -978,7 +1020,7 @@
 
         function switchManajemenTab(tab) {
             hideAllViews();
-            ['manajemen-nav-btn-transactions', 'manajemen-nav-btn-rekap', 'manajemen-nav-btn-stok'].forEach(id => {
+            ['manajemen-nav-btn-transactions', 'manajemen-nav-btn-rekap'].forEach(id => {
                 const btn = document.getElementById(id);
                 if (btn) btn.className = 'py-2 sm:py-3 border-b-2 border-transparent hover:text-white font-bold flex items-center gap-2 whitespace-nowrap';
             });
@@ -993,11 +1035,6 @@
                 const activeBtn = document.getElementById('manajemen-nav-btn-rekap');
                 if (activeBtn) activeBtn.className = 'py-2 sm:py-3 border-b-2 border-purple-400 text-purple-300 font-bold flex items-center gap-2 whitespace-nowrap';
                 renderMasterRekap();
-            } else if (tab === 'stok') {
-                document.getElementById('view-manajemen-stok')?.classList.remove('hidden');
-                const activeBtn = document.getElementById('manajemen-nav-btn-stok');
-                if (activeBtn) activeBtn.className = 'py-2 sm:py-3 border-b-2 border-purple-400 text-purple-300 font-bold flex items-center gap-2 whitespace-nowrap';
-                renderMasterStock();
             }
         }
 
@@ -1022,44 +1059,60 @@
             }
 
             grid.innerHTML = filtered.map(item => {
-                const isOutOfStock = item.stock <= 0;
+                // Periksa apakah stok sudah ditarik dari Apps Script
+                const isStockLoaded = (item.stock !== null && item.stock !== undefined);
+                const hasStock = isStockLoaded ? (item.stock > 0) : true;
+
+                // Tampilkan badge stok HANYA jika terhubung / data stok sudah ditarik
+                let stockBadgeHtml = '';
+                if (isStockLoaded) {
+                    if (hasStock) {
+                        stockBadgeHtml = `<span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-100/90 text-emerald-800 border border-emerald-200">Stok: ${item.stock}</span>`;
+                    } else {
+                        stockBadgeHtml = `<span class="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-red-100 text-red-700 border border-red-200">Stok Habis</span>`;
+                    }
+                }
+
+                const isBtnDisabled = isStockLoaded && !hasStock;
+
                 return `
-                    <div class="rounded-3xl p-5 border-2 ${item.borderClass} shadow-2xs hover:shadow-md transition space-y-4 flex flex-col justify-between relative overflow-hidden">
-                        <div class="flex items-center justify-between">
-                            <div class="w-12 h-12 rounded-2xl bg-white shadow-xs border border-slate-100/80 flex items-center justify-center text-pink-500 text-xl font-black">
-                                <i class="fa-solid fa-ticket"></i>
-                            </div>
-                            <span class="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${isOutOfStock ? 'bg-red-100/80 text-red-600 border border-red-200/60' : 'bg-emerald-100/80 text-emerald-800 border border-emerald-200/60'}">
-                                ${isOutOfStock ? 'HABIS' : 'TERSEDIA'}
-                            </span>
+                <div class="rounded-3xl p-5 border-2 ${item.borderClass} shadow-2xs hover:shadow-md transition space-y-4 flex flex-col justify-between relative overflow-hidden">
+                    <div class="flex items-center justify-between">
+                        <div class="w-12 h-12 rounded-2xl bg-white shadow-xs border border-slate-100/80 flex items-center justify-center text-pink-500 text-xl font-black">
+                            <i class="fa-solid fa-ticket"></i>
                         </div>
-
-                        <div class="space-y-0.5">
-                            <p class="text-[10px] font-black uppercase tracking-wider ${item.textBrandClass}">KANTIN SARAS SPENTIG</p>
-                            <h3 class="text-base font-black text-slate-900 tracking-tight">${item.name}</h3>
-                            <p class="text-2xl font-black ${item.priceClass}">${formatRupiah(item.price)}</p>
-                        </div>
-
-                        <button onclick="addToCart('${item.id}')" ${isOutOfStock ? 'disabled' : ''} class="w-full py-2.5 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-1.5 ${isOutOfStock ? 'bg-slate-200/70 text-slate-400 cursor-not-allowed' : item.btnClass}">
-                            + Tambah Ke Keranjang
-                        </button>
+                        ${stockBadgeHtml}
                     </div>
-                `;
-            }).join('');
+
+                    <div class="space-y-0.5">
+                        <p class="text-[10px] font-black uppercase tracking-wider ${item.textBrandClass}">KANTIN SARAS SPENTIG</p>
+                        <h3 class="text-base font-black text-slate-900 tracking-tight">${item.name}</h3>
+                        <p class="text-2xl font-black ${item.priceClass}">${formatRupiah(item.price)}</p>
+                    </div>
+
+                    <button onclick="addToCart('${item.id}')" ${isBtnDisabled ? 'disabled' : ''} class="w-full py-2.5 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-1.5 ${!isBtnDisabled ? item.btnClass : 'bg-slate-200 text-slate-400 cursor-not-allowed'}">
+                        ${isBtnDisabled ? 'Stok Belum Tersedia' : '+ Tambah Ke Keranjang'}
+                    </button>
+                </div>
+            `}).join('');
         }
 
         function addToCart(itemId) {
             const item = menuItems.find(m => m.id === itemId);
-            if (!item || item.stock <= 0) return;
+            if (!item) return;
 
             const existing = cart.find(c => c.id === itemId);
-            if (existing) {
-                if (existing.qty < item.stock) {
-                    existing.qty++;
-                } else {
-                    showToast(`Batas stok ${item.name} tercapai!`, 'error');
+            const currentQtyInCart = existing ? existing.qty : 0;
+
+            if (item.stock !== null && item.stock !== undefined) {
+                if (currentQtyInCart + 1 > item.stock) {
+                    showToast(`Stok ${item.name} di kantin tidak mencukupi (Tersedia: ${item.stock})`, 'error');
                     return;
                 }
+            }
+
+            if (existing) {
+                existing.qty++;
             } else {
                 cart.push({ id: item.id, name: item.name, price: item.price, icon: item.icon, qty: 1 });
             }
@@ -1115,9 +1168,9 @@
             const index = cart.findIndex(c => c.id === itemId);
             if (index === -1) return;
 
-            const mItem = menuItems.find(m => m.id === itemId);
-            if (change > 0 && mItem && cart[index].qty >= mItem.stock) {
-                showToast(`Stok ${mItem.name} tidak mencukupi`, 'error');
+            const menuItem = menuItems.find(m => m.id === itemId);
+            if (change > 0 && menuItem && menuItem.stock !== null && menuItem.stock !== undefined && (cart[index].qty + 1 > menuItem.stock)) {
+                showToast(`Stok ${menuItem.name} di kantin terbatas (${menuItem.stock})`, 'error');
                 return;
             }
 
@@ -1193,7 +1246,6 @@
             const refCode = document.getElementById('buyer-referral-input').value.trim().toUpperCase();
             const fileInput = document.getElementById('input-proof-file');
 
-            // Validasi wajib unggah foto bukti transfer
             if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
                 showToast('Wajib mengunggah foto bukti transfer sebelum mengirim pesanan!', 'error');
                 return;
@@ -1207,7 +1259,6 @@
 
             let compressedBase64 = "";
             try {
-                // Kompresi foto sebelum dikirim ke Google Drive
                 compressedBase64 = await compressImage(fileInput.files[0], 1000, 1000, 0.65);
             } catch (err) {
                 showToast('Gagal memproses gambar. Coba gunakan foto lain.', 'error');
@@ -1249,11 +1300,24 @@
                 vouchers: vouchersList,
                 paymentStatus: 'Belum Bayar',
                 redeemStatus: 'Belum Ditukar',
-                proofUrl: URL.createObjectURL(fileInput.files[0]) // Local fallback preview
+                proofUrl: URL.createObjectURL(fileInput.files[0])
             };
+
+            // Potong stok lokal sementara jika data stok sudah dimuat
+            cart.forEach(c => {
+                const menuItem = menuItems.find(m => m.id === c.id);
+                if (menuItem && menuItem.stock !== null && menuItem.stock !== undefined) {
+                    menuItem.stock = Math.max(0, menuItem.stock - c.qty);
+                }
+            });
 
             orders.unshift(newOrder);
             localStorage.setItem('saras_orders', JSON.stringify(orders));
+
+            // PRIVASI SISWA: Simpan ID pesanan di memori perangkat lokal HP/Laptop ini
+            let myOrderIds = JSON.parse(localStorage.getItem('saras_my_order_ids') || '[]');
+            myOrderIds.push(orderId);
+            localStorage.setItem('saras_my_order_ids', JSON.stringify(myOrderIds));
 
             if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes("TEMPELKAN_URL")) {
                 try {
@@ -1284,12 +1348,12 @@
             closeModal('modal-qris');
             cart = [];
             updateCartBadge();
+            renderMenu();
 
             showToast('Pesanan & Bukti Transfer Berhasil Dikirim! 🚀', 'success');
             switchTab('vouchers');
         }
 
-        // Helper Fungsi Kompresi Gambar
         function compressImage(file, maxWidth, maxHeight, quality) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -1332,20 +1396,25 @@
             const container = document.getElementById('vouchers-list-container');
             if (!container) return;
 
-            if (orders.length === 0) {
-                container.innerHTML = `<div class="text-center py-10 text-slate-400 font-bold text-xs space-y-2"><i class="fa-solid fa-receipt text-4xl"></i><p>Belum ada riwayat pembelian voucher</p></div>`;
+            const myOrderIds = JSON.parse(localStorage.getItem('saras_my_order_ids') || '[]');
+            const myOrders = orders.filter(o => myOrderIds.includes(o.id));
+
+            if (myOrders.length === 0) {
+                container.innerHTML = `<div class="text-center py-10 text-slate-400 font-bold text-xs space-y-2"><i class="fa-solid fa-receipt text-4xl"></i><p>Belum ada riwayat pembelian voucher di perangkat ini</p></div>`;
                 document.getElementById('unredeemed-badge')?.classList.add('hidden');
                 return;
             }
 
             let unredeemedTotal = 0;
 
-            container.innerHTML = orders.map(o => {
+            container.innerHTML = myOrders.map(o => {
                 const isPaid = o.paymentStatus === 'Sudah Bayar';
 
-                o.vouchers.forEach(v => {
-                    if (!v.redeemed) unredeemedTotal++;
-                });
+                if (o.vouchers && Array.isArray(o.vouchers)) {
+                    o.vouchers.forEach(v => {
+                        if (!v.redeemed) unredeemedTotal++;
+                    });
+                }
 
                 return `
                     <div class="bg-slate-50 p-4 sm:p-5 rounded-3xl border border-slate-200/90 space-y-4">
@@ -1364,7 +1433,7 @@
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                            ${o.vouchers.map(v => `
+                            ${(o.vouchers || []).map(v => `
                                 <div class="bg-white p-3 rounded-2xl border border-slate-200/80 flex items-center justify-between">
                                     <div class="flex items-center gap-2.5">
                                         <span class="text-xl">${v.icon}</span>
@@ -1421,8 +1490,8 @@
 
             document.getElementById('stat-wali-omset').innerText = formatRupiah(classOmset);
             document.getElementById('stat-wali-paid-count').innerText = `${paidCount} Pesanan Lunas`;
-            document.getElementById('stat-wali-vouchers-total').innerText = `${totalVouchers} Lembar`;
-            document.getElementById('stat-wali-unredeemed').innerText = `${unredeemedVouchers} Lembar`;
+            document.getElementById('stat-wali-vouchers-total').innerText = `${totalVouchers}`;
+            document.getElementById('stat-wali-unredeemed').innerText = `${unredeemedVouchers}`;
             document.getElementById('stat-wali-buyers-count').innerText = `${classBuyers.size} Siswa`;
         }
 
@@ -1493,7 +1562,7 @@
             order.paymentStatus = nextStatus;
             localStorage.setItem('saras_orders', JSON.stringify(orders));
 
-            if (APPS_SCRIPT_URL) {
+            if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes("TEMPELKAN_URL")) {
                 fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
                     body: JSON.stringify({ action: 'updateOrderStatus', orderId: orderId, paymentStatus: nextStatus })
@@ -1509,12 +1578,12 @@
             const order = orders.find(o => o.id === orderId);
             if (!order) return;
 
-            order.vouchers.forEach(v => v.redeemed = true);
+            if (order.vouchers) order.vouchers.forEach(v => v.redeemed = true);
             order.redeemStatus = 'Sudah Ditukar';
 
             localStorage.setItem('saras_orders', JSON.stringify(orders));
 
-            if (APPS_SCRIPT_URL) {
+            if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes("TEMPELKAN_URL")) {
                 fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
                     body: JSON.stringify({ action: 'updateOrderStatus', orderId: orderId, redeemStatus: 'Sudah Ditukar' })
@@ -1553,8 +1622,8 @@
 
             document.getElementById('stat-master-omset').innerText = formatRupiah(totalOmset);
             document.getElementById('stat-master-paid-count').innerText = `${paidCount} Transaksi Lunas`;
-            document.getElementById('stat-master-vouchers-total').innerText = `${totalVouchers} Lembar`;
-            document.getElementById('stat-master-unredeemed').innerText = `${unredeemedVouchers} Lembar`;
+            document.getElementById('stat-master-vouchers-total').innerText = `${totalVouchers}`;
+            document.getElementById('stat-master-unredeemed').innerText = `${unredeemedVouchers}`;
             document.getElementById('stat-master-active-classes').innerText = `${activeClassesSet.size} Kelas`;
         }
 
@@ -1669,55 +1738,11 @@
                     <td class="p-3.5"><span class="bg-purple-100 text-purple-900 px-2 py-0.5 rounded-md font-mono text-xs font-black">${r.refCode}</span></td>
                     <td class="p-3.5 font-bold text-slate-800">${r.className}</td>
                     <td class="p-3.5 text-center font-bold text-purple-700">${r.buyersCount.size} Siswa</td>
-                    <td class="p-3.5 text-center font-bold text-slate-700">${r.totalVouchers} Lembar</td>
-                    <td class="p-3.5 text-center font-bold ${r.unredeemedVouchers > 0 ? 'text-amber-600' : 'text-slate-400'}">${r.unredeemedVouchers} Lembar</td>
+                    <td class="p-3.5 text-center font-bold text-slate-700">${r.totalVouchers}</td>
+                    <td class="p-3.5 text-center font-bold ${r.unredeemedVouchers > 0 ? 'text-amber-600' : 'text-slate-400'}">${r.unredeemedVouchers}</td>
                     <td class="p-3.5 text-right font-black text-emerald-600">${formatRupiah(r.totalOmset)}</td>
                 </tr>
             `).join('');
-        }
-
-        function renderMasterStock() {
-            const grid = document.getElementById('master-stock-grid');
-            if (!grid) return;
-
-            grid.innerHTML = menuItems.map(item => `
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/90 space-y-3">
-                    <div class="flex items-center justify-between">
-                        <span class="text-3xl">${item.icon}</span>
-                        <span class="text-xs font-black text-purple-900 bg-purple-100 px-2.5 py-1 rounded-full">${formatRupiah(item.price)}</span>
-                    </div>
-                    <div>
-                        <h4 class="font-extrabold text-slate-800 text-sm">${item.name}</h4>
-                        <p class="text-xs text-slate-500 font-medium">Stok Saat Ini: <b class="text-slate-900 text-sm">${item.stock} pcs</b></p>
-                    </div>
-                    <div class="flex items-center gap-2 pt-1">
-                        <input type="number" id="input-stock-${item.id}" value="${item.stock}" min="0" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-black outline-none focus:ring-2 focus:ring-purple-500">
-                        <button onclick="updateMasterStockItem('${item.id}')" class="bg-purple-900 hover:bg-purple-950 text-white px-3 py-2 rounded-xl text-xs font-extrabold transition shrink-0">Simpan</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        async function updateMasterStockItem(itemId) {
-            const input = document.getElementById(`input-stock-${itemId}`);
-            if (!input) return;
-            const newStock = Math.max(0, parseInt(input.value) || 0);
-
-            const mItem = menuItems.find(m => m.id === itemId);
-            if (mItem) {
-                mItem.stock = newStock;
-
-                if (APPS_SCRIPT_URL) {
-                    fetch(APPS_SCRIPT_URL, {
-                        method: 'POST',
-                        body: JSON.stringify({ action: 'updateStock', itemId: itemId, newStock: newStock })
-                    }).catch(e => console.warn(e));
-                }
-
-                renderMenu();
-                renderMasterStock();
-                showToast(`Stok ${mItem.name} diperbarui ke ${newStock} pcs`, 'success');
-            }
         }
 
         function exportMasterToExcel() {
@@ -1749,7 +1774,7 @@
             showToast('Laporan Master Seluruh Sekolah berhasil diunduh!', 'success');
         }
 
-        window.onload = function() {
+        window.addEventListener('DOMContentLoaded', () => {
             const savedOrders = localStorage.getItem('saras_orders');
             if (savedOrders) {
                 try {
@@ -1763,7 +1788,7 @@
             if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes("TEMPELKAN_URL")) {
                 fetchLiveData();
             }
-        };
+        });
     </script>
 </body>
 </html>
