@@ -615,8 +615,11 @@
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
     <script>
-
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzHwNdy8n4-WqQlpbxNc68rJYRREbDFAhvgn5zLIFJ0zWjmp_Ybgky_jtA-zYVigGt9/exec";
+        // =========================================================================
+        // 🛍️ PRODUCTION STATE MANAGEMENT & LIVE GAS SYNC
+        // =========================================================================
+        // ⚠️ MASUKKAN / TEMPELKAN URL WEB APP GOOGLE APPS SCRIPT ANDA DI SINI:
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz4RBr6vZMu54SfI6HPWi9HXkcZJmmd1tnXbwLvgjFiq2SQHDeV577GrlW1Ce8tRFeD/exec";
 
         let currentRole = 'siswa';
         let isWaliKelasUnlocked = false;
@@ -1190,6 +1193,31 @@
             const refCode = document.getElementById('buyer-referral-input').value.trim().toUpperCase();
             const fileInput = document.getElementById('input-proof-file');
 
+            // Validasi wajib unggah foto bukti transfer
+            if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+                showToast('Wajib mengunggah foto bukti transfer sebelum mengirim pesanan!', 'error');
+                return;
+            }
+
+            const sendBtn = document.querySelector("#modal-qris button[onclick='submitOrderWithProof()']");
+            if (sendBtn) {
+                sendBtn.disabled = true;
+                sendBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Mengompres & Mengunggah...`;
+            }
+
+            let compressedBase64 = "";
+            try {
+                // Kompresi foto sebelum dikirim ke Google Drive
+                compressedBase64 = await compressImage(fileInput.files[0], 1000, 1000, 0.65);
+            } catch (err) {
+                showToast('Gagal memproses gambar. Coba gunakan foto lain.', 'error');
+                if (sendBtn) {
+                    sendBtn.disabled = false;
+                    sendBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Kirim Pesanan`;
+                }
+                return;
+            }
+
             const total = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
 
             let vouchersList = [];
@@ -1206,9 +1234,10 @@
             });
 
             const itemsSummaryStr = cart.map(c => `${c.name} (${c.qty}x)`).join(', ');
+            const orderId = `ORD-${Date.now()}`;
 
             const newOrder = {
-                id: `ORD-${Date.now()}`,
+                id: orderId,
                 date: new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
                 buyerName: name,
                 buyerClass: bClass,
@@ -1220,29 +1249,83 @@
                 vouchers: vouchersList,
                 paymentStatus: 'Belum Bayar',
                 redeemStatus: 'Belum Ditukar',
-                proofUrl: fileInput?.files[0] ? URL.createObjectURL(fileInput.files[0]) : 'https://placehold.co/400x600/065f46/ffffff?text=Bukti+Transfer+Siswa'
+                proofUrl: URL.createObjectURL(fileInput.files[0]) // Local fallback preview
             };
 
             orders.unshift(newOrder);
             localStorage.setItem('saras_orders', JSON.stringify(orders));
 
-            if (APPS_SCRIPT_URL) {
-                fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        action: 'createOrder',
-                        ...newOrder,
-                        vouchersSummary: cart.map(c => ({ id: c.id, qty: c.qty }))
-                    })
-                }).catch(e => console.warn('Sync order error:', e));
+            if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes("TEMPELKAN_URL")) {
+                try {
+                    const res = await fetch(APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            action: 'createOrder',
+                            ...newOrder,
+                            proofBase64: compressedBase64,
+                            vouchersSummary: cart.map(c => ({ id: c.id, qty: c.qty }))
+                        })
+                    });
+                    const data = await res.json();
+                    if (data.status === 'success' && data.proofDriveUrl) {
+                        newOrder.proofUrl = data.proofDriveUrl;
+                        localStorage.setItem('saras_orders', JSON.stringify(orders));
+                    }
+                } catch (e) {
+                    console.warn('Sync order error:', e);
+                }
+            }
+
+            if (sendBtn) {
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Kirim Pesanan`;
             }
 
             closeModal('modal-qris');
             cart = [];
             updateCartBadge();
 
-            showToast('Pesanan berhasil dikirim ke Wali Kelas! 🚀', 'success');
+            showToast('Pesanan & Bukti Transfer Berhasil Dikirim! 🚀', 'success');
             switchTab('vouchers');
+        }
+
+        // Helper Fungsi Kompresi Gambar
+        function compressImage(file, maxWidth, maxHeight, quality) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > maxWidth) {
+                                height = Math.round((height * maxWidth) / width);
+                                width = maxWidth;
+                            }
+                        } else {
+                            if (height > maxHeight) {
+                                width = Math.round((width * maxHeight) / height);
+                                height = maxHeight;
+                            }
+                        }
+
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+                        resolve(compressedBase64);
+                    };
+                    img.onerror = (err) => reject(err);
+                };
+                reader.onerror = (err) => reject(err);
+            });
         }
 
         function renderMyVouchers() {
