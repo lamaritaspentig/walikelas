@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kantin Digital SARAS Spentig - UPT SPF SMPN 3 Makassar</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts Inter & FontAwesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        html {
+            overflow-y: scroll;
+            scrollbar-gutter: stable;
+            font-family: 'Inter', sans-serif;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white">
+
+    <!-- Sticky Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-2 relative">
+            <!-- Brand Logo & School Info (Click to Toggle Access Menu) -->
+            <div class="relative">
+                <div class="flex items-center gap-2.5 cursor-pointer select-none group" onclick="toggleRoleMenu()">
+                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center font-black text-xl shadow-md shadow-emerald-500/20 shrink-0 group-hover:scale-105 transition duration-200">
+                        <i class="fa-solid fa-ticket"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-black text-slate-900 tracking-tight leading-none text-base sm:text-lg flex items-center gap-1.5">
+                            Kantin SARAS <span class="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold">Spentig</span>
+                        </h1>
+                        <p class="text-[11px] text-slate-500 font-medium">UPT SPF SMPN 3 Makassar</p>
+                    </div>
+                </div>
+
+                <!-- Role Dropdown Menu (Opened by clicking logo) -->
+                <div id="role-menu-dropdown" class="hidden absolute top-full left-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-slate-200 p-2 z-50 space-y-1">
+                    <p class="text-[10px] font-black uppercase text-slate-400 px-3 py-1 tracking-wider">Pilih Mode Akses</p>
+                    <button onclick="setRole('siswa'); toggleRoleMenu();" class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-800 flex items-center gap-2 transition">
+                        <i class="fa-solid fa-graduation-cap text-emerald-600 w-4 text-center"></i> Mode Siswa / Ortu
+                    </button>
+                    <button onclick="setRole('walikelas'); toggleRoleMenu();" class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-100 hover:text-slate-900 flex items-center gap-2 transition">
+                        <i class="fa-solid fa-user-tie text-blue-600 w-4 text-center"></i> Akses Wali Kelas
+                        <i id="walikelas-lock-icon" class="fa-solid fa-lock text-[10px] text-slate-400 ml-auto"></i>
+                    </button>
+                    <button onclick="setRole('manajemen'); toggleRoleMenu();" class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-slate-700 hover:bg-purple-50 hover:text-purple-900 flex items-center gap-2 transition">
+                        <i class="fa-solid fa-user-shield text-purple-600 w-4 text-center"></i> Akses Manajemen
+                        <i id="manajemen-lock-icon" class="fa-solid fa-lock text-[10px] text-slate-400 ml-auto"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Active Role Indicator Badge -->
+            <div id="active-role-badge" class="bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow-2xs">
+                <i class="fa-solid fa-graduation-cap text-emerald-600"></i>
+                <span>Siswa / Ortu</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Student Navigation -->
+    <nav id="siswa-nav" class="bg-white border-b border-slate-200 sticky top-[61px] z-30 shadow-xs">
+        <div class="max-w-6xl mx-auto px-4 flex items-center justify-between text-xs sm:text-sm font-bold">
+            <div class="flex gap-1 sm:gap-2 py-1">
+                <button onclick="switchTab('menu')" id="nav-btn-menu" class="py-2.5 px-3 sm:px-4 rounded-xl text-emerald-700 bg-emerald-50 font-bold flex items-center gap-2 transition">
+                    <i class="fa-solid fa-utensils"></i> Katalog Voucher
+                </button>
+                <button onclick="switchTab('vouchers')" id="nav-btn-vouchers" class="py-2.5 px-3 sm:px-4 rounded-xl text-slate-600 hover:bg-slate-100 font-bold flex items-center gap-2 transition relative">
+                    <i class="fa-solid fa-wallet"></i> Voucher Saya
+                    <span id="unredeemed-badge" class="hidden bg-amber-500 text-white text-[10px] font-black px-1.5 py-0.2 rounded-full">0</span>
+                </button>
+            </div>
+
+            <button onclick="switchTab('cart')" id="nav-btn-cart" class="py-2 px-3 sm:px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold flex items-center gap-2 shadow-xs transition">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="hidden sm:inline">Keranjang</span>
+                <span id="cart-count-badge" class="bg-white text-emerald-800 text-[11px] font-black px-2 py-0.5 rounded-full">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Wali Kelas Navigation -->
+    <nav id="walikelas-nav" class="hidden bg-slate-900 text-slate-300 border-b border-slate-800 sticky top-[61px] z-30 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 flex items-center justify-between gap-2 py-2 text-xs sm:text-sm font-bold">
+            <div class="flex gap-4 py-1">
+                <button onclick="switchWaliTab('transactions')" id="walikelas-nav-btn-transactions" class="py-2 border-b-2 border-emerald-400 text-emerald-400 font-bold flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-solid fa-clipboard-list"></i> Transaksi Kelas Saya
+                </button>
+            </div>
+
+            <button onclick="lockWaliKelas()" class="py-1.5 px-3 bg-red-500/20 hover:bg-red-500/30 text-red-300 rounded-xl text-xs font-bold flex items-center gap-1.5 transition border border-red-500/30">
+                <i class="fa-solid fa-right-from-bracket"></i> Keluar Kelas
+            </button>
+        </div>
+    </nav>
+
+    <!-- Manajemen Navigation -->
+    <nav id="manajemen-nav" class="hidden bg-purple-950 text-purple-200 border-b border-purple-800 sticky top-[61px] z-30 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 py-2 sm:py-0">
+            <div class="flex gap-4 sm:gap-6 text-xs sm:text-sm font-bold overflow-x-auto no-scrollbar py-1">
+                <button onclick="switchManajemenTab('transactions')" id="manajemen-nav-btn-transactions" class="py-2 sm:py-3 border-b-2 border-purple-400 text-purple-300 font-bold flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-solid fa-list-check"></i> Seluruh Transaksi Sekolah
+                </button>
+                <button onclick="switchManajemenTab('rekap')" id="manajemen-nav-btn-rekap" class="py-2 sm:py-3 border-b-2 border-transparent hover:text-white font-bold flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-solid fa-chart-pie"></i> Rekapitulasi Per Kelas (33 Kelas)
+                </button>
+                <button onclick="switchManajemenTab('stok')" id="manajemen-nav-btn-stok" class="py-2 sm:py-3 border-b-2 border-transparent hover:text-white font-bold flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-solid fa-boxes-stacked"></i> Kelola Stok Voucher
+                </button>
+            </div>
+
+            <button onclick="lockManajemen()" class="py-1.5 px-3 bg-red-500/20 hover:bg-red-500/30 text-red-300 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition border border-red-500/30">
+                <i class="fa-solid fa-right-from-bracket"></i> Keluar Manajemen
+            </button>
+        </div>
+    </nav>
+
+    <main class="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 space-y-6 pb-24 sm:pb-12">
+
+        <!-- Banner Siswa -->
+        <div id="banner-siswa" class="bg-gradient-to-r from-emerald-800 via-teal-800 to-slate-900 text-white rounded-3xl p-5 shadow-xl border border-emerald-700/50 relative overflow-hidden">
+            <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="space-y-1">
+                    <span class="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider bg-emerald-500/30 text-emerald-200 px-2.5 py-0.5 rounded-full border border-emerald-400/30">
+                        <i class="fa-solid fa-bolt text-amber-300"></i> Bebas Antri Jam Istirahat
+                    </span>
+                    <h2 class="text-base sm:text-xl font-black tracking-tight">Pesan Voucher Kantin Lebih Praktis!</h2>
+                    <p class="text-xs text-emerald-100/80 max-w-xl">Beli voucher fisik kantin secara digital via QRIS, tunjukkan bukti ke Wali Kelas, dan tukarkan makanan di Kantin SARAS Spentig.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Banner Wali Kelas -->
+        <div id="banner-walikelas" class="hidden bg-slate-900 text-white rounded-3xl p-5 shadow-xl border border-slate-800 space-y-4 relative overflow-hidden">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                <div>
+                    <h2 class="font-black text-base sm:text-lg tracking-tight flex items-center gap-2">
+                        <i class="fa-solid fa-chalkboard-user text-emerald-400"></i> Wali Kelas: <span id="active-class-title-banner" class="text-emerald-400">VII.1</span>
+                    </h2>
+                    <p class="text-xs text-slate-400">Verifikasi Pembayaran & Penyerahan Voucher Fisik Siswa Kelas Anda</p>
+                </div>
+                <span class="text-[11px] font-black bg-slate-800 text-emerald-400 px-3 py-1 rounded-full border border-slate-700 font-mono self-start sm:self-auto">
+                    Ref: <span id="active-ref-code-banner">WK-VII1</span>
+                </span>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                <div class="bg-slate-800/80 p-3.5 rounded-2xl border border-slate-700/80 space-y-1">
+                    <p class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Omset Kelas Lunas</p>
+                    <p id="stat-wali-omset" class="text-lg font-black text-emerald-400">Rp 0</p>
+                    <p id="stat-wali-paid-count" class="text-[10px] text-slate-400 font-bold">0 Pesanan Lunas</p>
+                </div>
+
+                <div class="bg-slate-800/80 p-3.5 rounded-2xl border border-slate-700/80 space-y-1">
+                    <p class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Total Voucher</p>
+                    <p id="stat-wali-vouchers-total" class="text-lg font-black text-blue-400">0 Lembar</p>
+                    <p class="text-[10px] text-slate-400 font-bold">Dipesan Siswa Kelas</p>
+                </div>
+
+                <div class="bg-slate-800/80 p-3.5 rounded-2xl border border-slate-700/80 space-y-1">
+                    <p class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Siap Diserahkan</p>
+                    <p id="stat-wali-unredeemed" class="text-lg font-black text-amber-400">0 Lembar</p>
+                    <p class="text-[10px] text-slate-400 font-bold">Perlu Diserahkan ke Siswa</p>
+                </div>
+
+                <div class="bg-slate-800/80 p-3.5 rounded-2xl border border-slate-700/80 space-y-1">
+                    <p class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Siswa Pembeli</p>
+                    <p id="stat-wali-buyers-count" class="text-lg font-black text-purple-300">0 Siswa</p>
+                    <p class="text-[10px] text-slate-400 font-bold">Aktif Membeli Voucher</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Banner Manajemen -->
+        <div id="banner-manajemen" class="hidden bg-gradient-to-br from-purple-950 via-slate-900 to-indigo-950 text-white rounded-3xl p-5 shadow-xl border border-purple-800/60 space-y-4 relative overflow-hidden">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-purple-800/80 pb-3">
+                <div>
+                    <h2 class="font-black text-base sm:text-lg tracking-tight flex items-center gap-2">
+                        <i class="fa-solid fa-school-flag text-purple-400"></i> Master Dashboard Manajemen Kantin Sekolah
+                    </h2>
+                    <p class="text-xs text-purple-300/80">Pengawasan Laporan Transaksi & Stok Voucher Seluruh Kelas (UPT SPF SMPN 3 Makassar)</p>
+                </div>
+                <span class="text-[11px] font-extrabold bg-purple-900/80 text-purple-300 px-3 py-1 rounded-full border border-purple-700/80 self-start sm:self-auto flex items-center gap-1.5">
+                    <i class="fa-solid fa-user-shield text-purple-400"></i> Mode Super Admin
+                </span>
+            </div>
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                <div class="bg-purple-900/40 p-3.5 rounded-2xl border border-purple-700/50 space-y-1">
+                    <p class="text-[10px] font-black uppercase text-purple-300 tracking-wider">Omset Seluruh Sekolah</p>
+                    <p id="stat-master-omset" class="text-lg sm:text-xl font-black text-emerald-400">Rp 0</p>
+                    <p id="stat-master-paid-count" class="text-[10px] text-purple-300/80 font-bold">0 Transaksi Lunas</p>
+                </div>
+
+                <div class="bg-purple-900/40 p-3.5 rounded-2xl border border-purple-700/50 space-y-1">
+                    <p class="text-[10px] font-black uppercase text-purple-300 tracking-wider">Total Voucher</p>
+                    <p id="stat-master-vouchers-total" class="text-lg sm:text-xl font-black text-blue-400">0 Lembar</p>
+                    <p class="text-[10px] text-purple-300/80 font-bold">Terjual Seluruh Kelas</p>
+                </div>
+
+                <div class="bg-purple-900/40 p-3.5 rounded-2xl border border-purple-700/50 space-y-1">
+                    <p class="text-[10px] font-black uppercase text-purple-300 tracking-wider">Belum Diserahkan</p>
+                    <p id="stat-master-unredeemed" class="text-lg sm:text-xl font-black text-amber-400">0 Lembar</p>
+                    <p class="text-[10px] text-purple-300/80 font-bold">Menunggu Wali Kelas</p>
+                </div>
+
+                <div class="bg-purple-900/40 p-3.5 rounded-2xl border border-purple-700/50 space-y-1">
+                    <p class="text-[10px] font-black uppercase text-purple-300 tracking-wider">Kelas Aktif</p>
+                    <p id="stat-master-active-classes" class="text-lg sm:text-xl font-black text-purple-200">0 Kelas</p>
+                    <p class="text-[10px] text-purple-300/80 font-bold">Pernah Membeli</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW: MENU CATALOG -->
+        <section id="view-menu" class="space-y-5">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-white p-4 rounded-3xl border border-slate-200/80 shadow-xs">
+                <div>
+                    <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-store text-emerald-600"></i> Pilih Nominal Voucher Kantin
+                    </h2>
+                    <p class="text-xs text-slate-500">Pilih lembar voucher yang ingin dibeli, lalu selesaikan di keranjang</p>
+                </div>
+
+                <div class="flex gap-1.5 overflow-x-auto no-scrollbar w-full sm:w-auto">
+                    <button onclick="setCategoryFilter('all')" id="filter-all" class="px-3 py-1.5 bg-emerald-600 text-white text-xs font-bold rounded-xl transition whitespace-nowrap">Semua</button>
+                    <button onclick="setCategoryFilter('kecil')" id="filter-kecil" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition whitespace-nowrap">Nominal Kecil (≤ Rp5rb)</button>
+                    <button onclick="setCategoryFilter('besar')" id="filter-besar" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition whitespace-nowrap">Nominal Besar (> Rp5rb)</button>
+                </div>
+            </div>
+
+            <!-- Vouchers Grid -->
+            <div id="vouchers-catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </section>
+
+        <!-- VIEW: CART -->
+        <section id="view-cart" class="hidden space-y-6">
+            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-emerald-600"></i> Keranjang Pesanan Voucher
+                    </h2>
+                    <button onclick="clearCart()" class="text-xs text-red-500 hover:text-red-700 font-bold flex items-center gap-1">
+                        <i class="fa-solid fa-trash-can"></i> Kosongkan
+                    </button>
+                </div>
+
+                <div id="cart-items-container" class="space-y-3"></div>
+
+                <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200/80 space-y-4">
+                    <h3 class="text-xs font-black uppercase text-slate-600 tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-id-card text-emerald-600"></i> Data Diri Siswa & Kode Referal Wali Kelas
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <div class="space-y-1">
+                            <label class="block text-xs font-bold text-slate-700">Nama Lengkap Siswa *</label>
+                            <input type="text" id="buyer-name" placeholder="Contoh: Muhammad Raihan" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-xs font-bold text-slate-700">Kelas Siswa *</label>
+                            <input type="text" id="buyer-class" placeholder="Contoh: VII.1 / VIII.2 / IX.11" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-xs font-bold text-slate-700">NISN / NIS (Opsional)</label>
+                            <input type="text" id="buyer-nisn" placeholder="Nomor Induk Siswa" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+
+                        <div class="space-y-1">
+                            <label class="block text-xs font-bold text-slate-700">No. WhatsApp Ortu/Siswa *</label>
+                            <input type="tel" id="buyer-phone" placeholder="Contoh: 08123456789" class="w-full px-3.5 py-2.5 bg-white border border-slate-300 rounded-xl text-xs font-bold text-slate-800 outline-none focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-slate-200/80 space-y-1.5">
+                        <label class="block text-xs font-extrabold text-slate-800 flex items-center justify-between">
+                            <span>Ketik Kode Referal Wali Kelas *</span>
+                            <span class="text-[10px] text-emerald-700 font-bold">Wajib Diawali "WK-"</span>
+                        </label>
+                        
+                        <div class="relative">
+                            <input type="text" id="buyer-referral-input" oninput="handleReferralInput(this)" placeholder="Ketik Kode Referal (Misal: WK-VII1, WK-VIII2, WK-IX11)" class="w-full px-4 py-3 bg-white border-2 border-emerald-500 rounded-xl text-xs font-black uppercase text-emerald-900 outline-none focus:ring-2 focus:ring-emerald-600 transition tracking-wide">
+                            <i id="referral-valid-icon" class="fa-solid fa-circle-check absolute right-3.5 top-3.5 text-emerald-600 text-base hidden"></i>
+                        </div>
+
+                        <p id="referral-error-msg" class="text-[11px] text-red-500 font-bold hidden flex items-center gap-1">
+                            <i class="fa-solid fa-circle-exclamation"></i> Format salah! Harus diawali "WK-" (Misal: WK-VII1)
+                        </p>
+                        
+                        <p class="text-[11px] text-slate-500 font-medium leading-relaxed">
+                            <i class="fa-solid fa-lightbulb text-amber-500"></i> Gunakan Angka Romawi untuk angkatan (VII, VIII, IX) lalu diikuti nomor kelas 1–11.<br>
+                            <span class="font-bold text-slate-700">Contoh:</span> <code class="bg-slate-200 px-1 py-0.5 rounded font-bold text-emerald-800">WK-VII1</code> untuk VII.1, <code class="bg-slate-200 px-1 py-0.5 rounded font-bold text-emerald-800">WK-VIII5</code> untuk VIII.5, <code class="bg-slate-200 px-1 py-0.5 rounded font-bold text-emerald-800">WK-IX11</code> untuk IX.11.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-emerald-950 text-white p-5 rounded-2xl flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+                    <div>
+                        <p class="text-xs text-emerald-300 font-bold">Total Pembayaran Voucher:</p>
+                        <p id="cart-total-price" class="text-2xl font-black text-emerald-400">Rp 0</p>
+                    </div>
+
+                    <button onclick="proceedToCheckout()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black px-6 py-3.5 rounded-xl text-xs shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-qrcode text-base"></i> Bayar Lewat QRIS Sekarang
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW: MY VOUCHERS -->
+        <section id="view-vouchers" class="hidden space-y-4">
+            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div>
+                        <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-wallet text-emerald-600"></i> Voucher Kantin Saya
+                        </h2>
+                        <p class="text-xs text-slate-500">Tunjukkan bukti transaksi atau voucher ke Wali Kelas untuk penyerahan fisik</p>
+                    </div>
+                    <button onclick="fetchLiveData()" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 bg-emerald-50 px-3 py-1.5 rounded-xl flex items-center gap-1 transition">
+                        <i class="fa-solid fa-rotate"></i> Refresh Data
+                    </button>
+                </div>
+
+                <div id="vouchers-list-container" class="space-y-4"></div>
+            </div>
+        </section>
+
+        <!-- VIEW: WALI KELAS TRANSACTIONS -->
+        <section id="view-walikelas-transactions" class="hidden space-y-4">
+            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-4">
+                    <div>
+                        <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-clipboard-list text-blue-600"></i> Daftar Transaksi Siswa <span id="active-class-title-table" class="text-blue-600">Kelas VII.1</span>
+                        </h2>
+                        <p class="text-xs text-slate-500">Verifikasi status bayar dan serahkan voucher fisik ke siswa kelas Anda</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-xs"></i>
+                        <input type="text" id="wali-search-input" onkeyup="renderWaliKelasTransactions()" placeholder="Cari Nama Siswa atau NISN..." class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none focus:ring-2 focus:ring-emerald-500 transition">
+                    </div>
+                    <select id="wali-status-filter" onchange="renderWaliKelasTransactions()" class="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-700 outline-none">
+                        <option value="all">Semua Status Bayar & Penyerahan</option>
+                        <option value="unpaid">⚠️ Belum Bayar</option>
+                        <option value="paid">✅ Sudah Bayar</option>
+                        <option value="unredeemed">📦 Belum Diserahkan Ke Siswa</option>
+                        <option value="redeemed">🎉 Sudah Diserahkan</option>
+                    </select>
+                </div>
+
+                <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-slate-50 border-b border-slate-200 text-[11px] font-black text-slate-600 uppercase tracking-wider">
+                            <tr>
+                                <th class="p-3.5">#</th>
+                                <th class="p-3.5">Siswa & NISN</th>
+                                <th class="p-3.5">Rincian Voucher</th>
+                                <th class="p-3.5">Total</th>
+                                <th class="p-3.5">Bukti Bayar</th>
+                                <th class="p-3.5">Status Bayar</th>
+                                <th class="p-3.5 text-right">Aksi Penyerahan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="walikelas-transactions-tbody" class="divide-y divide-slate-100"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW: MANAJEMEN ALL TRANSACTIONS -->
+        <section id="view-manajemen-transactions" class="hidden space-y-4">
+            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-4">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-4">
+                    <div>
+                        <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-layer-group text-purple-600"></i> Seluruh Transaksi Kantin Sekolah
+                        </h2>
+                        <p class="text-xs text-slate-500">Monitor transaksi dari seluruh angkatan (Kelas VII, VIII, IX)</p>
+                    </div>
+                    <button onclick="exportMasterToExcel()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-md flex items-center justify-center gap-2 transition">
+                        <i class="fa-solid fa-file-excel"></i> Export Rekap Master (Excel)
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-xs"></i>
+                        <input type="text" id="master-search-input" onkeyup="renderMasterTransactions()" placeholder="Cari Nama Siswa, NISN, atau Kode..." class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none focus:ring-2 focus:ring-purple-500 transition">
+                    </div>
+                    <select id="master-class-filter" onchange="renderMasterTransactions()" class="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-700 outline-none">
+                        <option value="all">Semua Kelas & Angkatan</option>
+                        <option value="VII">Hanya Kelas VII (VII.1 - VII.11)</option>
+                        <option value="VIII">Hanya Kelas VIII (VIII.1 - VIII.11)</option>
+                        <option value="IX">Hanya Kelas IX (IX.1 - IX.11)</option>
+                    </select>
+                    <select id="master-status-filter" onchange="renderMasterTransactions()" class="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-700 outline-none">
+                        <option value="all">Semua Status Bayar & Penyerahan</option>
+                        <option value="unpaid">⚠️ Belum Bayar</option>
+                        <option value="paid">✅ Sudah Bayar</option>
+                        <option value="unredeemed">📦 Belum Diserahkan Wali Kelas</option>
+                        <option value="redeemed">🎉 Sudah Diserahkan</option>
+                    </select>
+                </div>
+
+                <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-slate-50 border-b border-slate-200 text-[11px] font-black text-slate-600 uppercase tracking-wider">
+                            <tr>
+                                <th class="p-3.5">#</th>
+                                <th class="p-3.5">Tanggal</th>
+                                <th class="p-3.5">Kelas & Ref</th>
+                                <th class="p-3.5">Siswa & NISN</th>
+                                <th class="p-3.5">Rincian Voucher</th>
+                                <th class="p-3.5">Total</th>
+                                <th class="p-3.5">Status Bayar</th>
+                                <th class="p-3.5">Penyerahan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="master-transactions-tbody" class="divide-y divide-slate-100"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW: MANAJEMEN REKAP PER KELAS -->
+        <section id="view-manajemen-rekap" class="hidden space-y-4">
+            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-4">
+                <div class="border-b border-slate-100 pb-3">
+                    <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-purple-600"></i> Rekapitulasi Omset Per Kelas (33 Kelas)
+                    </h2>
+                    <p class="text-xs text-slate-500">Peringkat dan rincian transaksi tiap kelas di bawah pengawasan Wali Kelas</p>
+                </div>
+
+                <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-purple-950 text-white text-[11px] font-black uppercase tracking-wider">
+                            <tr>
+                                <th class="p-3.5">Kode Referal</th>
+                                <th class="p-3.5">Nama Kelas</th>
+                                <th class="p-3.5 text-center">Jumlah Pembeli</th>
+                                <th class="p-3.5 text-center">Total Voucher</th>
+                                <th class="p-3.5 text-center">Belum Diserahkan</th>
+                                <th class="p-3.5 text-right">Total Omset Lunas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="master-rekap-tbody" class="divide-y divide-slate-100 text-xs font-semibold"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW: MANAJEMEN KELOLA STOK VOUCHER -->
+        <section id="view-manajemen-stok" class="hidden space-y-4">
+            <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-5">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <div>
+                        <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-boxes-stacked text-purple-600"></i> Kelola Stok Voucher Kantin
+                        </h2>
+                        <p class="text-xs text-slate-500">Atur ketersediaan stok voucher fisik secara terpusat</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="master-stock-grid"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL: QRIS CHECKOUT -->
+    <div id="modal-qris" onclick="if(event.target === this) closeModal('modal-qris')" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-5 border border-slate-100 relative max-h-[90vh] overflow-y-auto">
+            <div class="text-center space-y-1">
+                <span class="bg-emerald-100 text-emerald-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Pembayaran Resmi QRIS</span>
+                <h3 class="text-base font-black text-slate-900">Scan & Unggah Bukti Transfer</h3>
+                <p class="text-xs text-slate-500">Simpan bukti transfer untuk dikonfirmasi Wali Kelas</p>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl text-center space-y-3">
+                <img src="https://lh3.googleusercontent.com/d/1gfnoNSW0_cYct_q1YCaM_JQ0cAUa8-Vq" alt="QRIS Code" class="w-48 h-48 mx-auto rounded-xl shadow-md border border-slate-200">
+                <div>
+                    <p class="text-xs font-bold text-slate-600">NMH: Kantin Digital Spentig</p>
+                    <p id="qris-modal-amount" class="text-xl font-black text-emerald-700">Rp 0</p>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-xs font-extrabold text-slate-700">Unggah Foto Bukti Transfer *</label>
+                <input type="file" id="input-proof-file" accept="image/*" class="w-full text-xs font-medium text-slate-500 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer">
+            </div>
+
+            <div class="flex gap-2">
+                <button onclick="closeModal('modal-qris')" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-3 rounded-xl font-bold text-xs transition">
+                    Batal
+                </button>
+                <button onclick="submitOrderWithProof()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-xs shadow-md transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-paper-plane"></i> Kirim Pesanan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: WALI KELAS LOGIN (Cleaned - No Demo Hints) -->
+    <div id="modal-walikelas-pin" onclick="if(event.target === this) closeWaliKelasPinModal(event)" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-xs w-full p-6 shadow-2xl space-y-4 border border-slate-100 text-center relative">
+            <div class="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-xl mx-auto shadow-md">
+                <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <div>
+                <h3 class="text-sm font-extrabold text-slate-800">Login Wali Kelas</h3>
+                <p class="text-xs text-slate-500 mt-1">Masukkan Kode Referal & PIN Keamanan</p>
+            </div>
+            
+            <form onsubmit="verifyWaliKelasPin(event)" class="space-y-3">
+                <div class="space-y-1 text-left">
+                    <label class="block text-[11px] font-extrabold text-slate-700">Kode Referal Kelas</label>
+                    <input type="text" id="input-walikelas-ref" placeholder="WK-VII1" class="w-full text-center uppercase tracking-wider text-xs font-black py-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+
+                <div class="space-y-1 text-left">
+                    <label class="block text-[11px] font-extrabold text-slate-700">PIN Keamanan Wali Kelas</label>
+                    <input type="password" id="input-walikelas-pin" maxlength="10" placeholder="Masukkan PIN" class="w-full text-center tracking-widest text-base font-bold py-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+
+                <p id="walikelas-pin-error-msg" class="text-[11px] text-red-500 font-bold hidden">Kode Referal atau PIN Salah!</p>
+                
+                <div class="flex gap-2 pt-1">
+                    <button type="button" onclick="closeWaliKelasPinModal(event)" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-xl font-bold text-xs transition">
+                        Batal
+                    </button>
+                    <button type="submit" class="flex-1 bg-slate-900 hover:bg-black text-white py-2.5 rounded-xl font-bold text-xs shadow-md transition">
+                        Masuk
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: MANAJEMEN LOGIN (Cleaned - No Demo Hints) -->
+    <div id="modal-manajemen-pin" onclick="if(event.target === this) closeManajemenPinModal(event)" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-xs w-full p-6 shadow-2xl space-y-4 border border-slate-100 text-center relative">
+            <div class="w-12 h-12 rounded-2xl bg-purple-950 text-white flex items-center justify-center text-xl mx-auto shadow-md">
+                <i class="fa-solid fa-user-shield"></i>
+            </div>
+            <div>
+                <h3 class="text-sm font-extrabold text-slate-800">Login Manajemen Kantin</h3>
+                <p class="text-xs text-slate-500 mt-1">Masukkan PIN Master Pengelola Kantin</p>
+            </div>
+            
+            <form onsubmit="verifyManajemenPin(event)" class="space-y-3">
+                <div class="space-y-2 text-left relative">
+                    <label class="block text-[11px] font-extrabold text-slate-700">PIN Keamanan Master</label>
+                    <input type="password" id="input-manajemen-pin" maxlength="20" placeholder="Masukkan PIN Master" class="w-full text-center tracking-widest text-base font-bold py-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+
+                <p id="manajemen-pin-error-msg" class="text-[11px] text-red-500 font-bold hidden">PIN Master Salah!</p>
+                
+                <div class="flex gap-2 pt-1">
+                    <button type="button" onclick="closeManajemenPinModal(event)" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-xl font-bold text-xs transition">
+                        Batal
+                    </button>
+                    <button type="submit" class="flex-1 bg-purple-900 hover:bg-purple-950 text-white py-2.5 rounded-xl font-bold text-xs shadow-md transition">
+                        Masuk
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <script>
+
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzHwNdy8n4-WqQlpbxNc68rJYRREbDFAhvgn5zLIFJ0zWjmp_Ybgky_jtA-zYVigGt9/exec";
+
+        let currentRole = 'siswa';
+        let isWaliKelasUnlocked = false;
+        let isManajemenUnlocked = false;
+
+        let cart = [];
+        let orders = [];
+        let activeCategoryFilter = 'all';
+        let activeWaliKelasRefCode = 'WK-VII1';
+        let activeClassName = 'Kelas VII.1';
+
+        let menuItems = [
+            { id: 'vch-1000', name: 'Voucher Belanja', price: 1000, stock: 0, category: 'kecil', icon: '🎟️', borderClass: 'border-amber-200 bg-amber-50/30', textBrandClass: 'text-amber-700', priceClass: 'text-amber-600', btnClass: 'bg-amber-500 hover:bg-amber-600 text-white shadow-amber-500/20' },
+            { id: 'vch-2000', name: 'Voucher Belanja', price: 2000, stock: 0, category: 'kecil', icon: '🎟️', borderClass: 'border-orange-200 bg-orange-50/30', textBrandClass: 'text-orange-700', priceClass: 'text-orange-600', btnClass: 'bg-orange-500 hover:bg-orange-600 text-white shadow-orange-500/20' },
+            { id: 'vch-3000', name: 'Voucher Belanja', price: 3000, stock: 0, category: 'kecil', icon: '🎟️', borderClass: 'border-emerald-200 bg-emerald-50/30', textBrandClass: 'text-emerald-700', priceClass: 'text-emerald-600', btnClass: 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-emerald-500/20' },
+            { id: 'vch-5000', name: 'Voucher Belanja', price: 5000, stock: 0, category: 'kecil', icon: '🎟️', borderClass: 'border-blue-200 bg-blue-50/30', textBrandClass: 'text-blue-700', priceClass: 'text-blue-600', btnClass: 'bg-blue-500 hover:bg-blue-600 text-white shadow-blue-500/20' },
+            { id: 'vch-10000', name: 'Voucher Belanja', price: 10000, stock: 0, category: 'besar', icon: '🎟️', borderClass: 'border-purple-200 bg-purple-50/30', textBrandClass: 'text-purple-700', priceClass: 'text-purple-600', btnClass: 'bg-purple-500 hover:bg-purple-600 text-white shadow-purple-500/20' }
+        ];
+
+        // Helper Utility Functions
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(number || 0);
+        }
+
+        function openModal(id) {
+            document.getElementById(id)?.classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id)?.classList.add('hidden');
+        }
+
+        function hideAllViews() {
+            ['view-menu', 'view-cart', 'view-vouchers', 'view-walikelas-transactions', 'view-manajemen-transactions', 'view-manajemen-rekap', 'view-manajemen-stok'].forEach(id => {
+                document.getElementById(id)?.classList.add('hidden');
+            });
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            const bgColors = {
+                success: 'bg-emerald-800 text-white border-emerald-700',
+                error: 'bg-red-800 text-white border-red-700',
+                info: 'bg-slate-800 text-white border-slate-700'
+            };
+            toast.className = `px-4 py-3 rounded-2xl shadow-xl text-xs font-bold border pointer-events-auto transition-all transform translate-y-2 opacity-0 flex items-center gap-2 ${bgColors[type] || bgColors.info}`;
+            toast.innerHTML = `<span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // =========================================================================
+        // 📡 LIVE DATA FETCHING FROM GOOGLE SHEETS
+        // =========================================================================
+        async function fetchLiveData() {
+            if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes("TEMPELKAN_URL")) return;
+
+            try {
+                const res = await fetch(`${APPS_SCRIPT_URL}?action=getData`);
+                const data = await res.json();
+
+                if (data.status === 'success') {
+                    if (data.stock) {
+                        menuItems.forEach(item => {
+                            if (data.stock[item.id] !== undefined) {
+                                item.stock = data.stock[item.id];
+                            }
+                        });
+                    }
+
+                    if (data.orders && Array.isArray(data.orders)) {
+                        orders = data.orders.map(o => {
+                            return {
+                                ...o,
+                                vouchers: o.vouchers || generateVouchersListFromSummary(o.itemsSummary, o.id)
+                            };
+                        });
+                        localStorage.setItem('saras_orders', JSON.stringify(orders));
+                    }
+
+                    renderMenu();
+                    renderMyVouchers();
+                    if (currentRole === 'walikelas') {
+                        renderWaliKelasSummary();
+                        renderWaliKelasTransactions();
+                    } else if (currentRole === 'manajemen') {
+                        renderMasterSummary();
+                        renderMasterTransactions();
+                    }
+                }
+            } catch (err) {
+                console.warn('Gagal memuat data dari Google Apps Script:', err);
+            }
+        }
+
+        function generateVouchersListFromSummary(summaryStr, orderId) {
+            const list = [];
+            if (!summaryStr) return list;
+            const parts = summaryStr.split(',');
+            parts.forEach((p, idx) => {
+                const name = p.split('(')[0].trim();
+                const qtyMatch = p.match(/\((\d+)x\)/);
+                const qty = qtyMatch ? parseInt(qtyMatch[1]) : 1;
+                for (let i = 0; i < qty; i++) {
+                    list.push({
+                        id: `${orderId}-V${idx + 1}-${i + 1}`,
+                        name: name || 'Voucher Belanja',
+                        price: 0,
+                        icon: '🎟️',
+                        redeemed: false
+                    });
+                }
+            });
+            return list;
+        }
+
+        function toggleRoleMenu() {
+            const dropdown = document.getElementById('role-menu-dropdown');
+            if (dropdown) dropdown.classList.toggle('hidden');
+        }
+
+        document.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('role-menu-dropdown');
+            const logo = document.querySelector('.group[onclick="toggleRoleMenu()"]');
+            if (dropdown && !dropdown.classList.contains('hidden')) {
+                if (logo && !logo.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                }
+            }
+        });
+
+        function setRole(role) {
+            currentRole = role;
+            const badge = document.getElementById('active-role-badge');
+            const siswaNav = document.getElementById('siswa-nav');
+            const waliNav = document.getElementById('walikelas-nav');
+            const manNav = document.getElementById('manajemen-nav');
+
+            if (role === 'siswa') {
+                if (badge) {
+                    badge.className = 'bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow-2xs';
+                    badge.innerHTML = `<i class="fa-solid fa-graduation-cap text-emerald-600"></i><span>Siswa / Ortu</span>`;
+                }
+
+                if (siswaNav) siswaNav.classList.remove('hidden');
+                if (waliNav) waliNav.classList.add('hidden');
+                if (manNav) manNav.classList.add('hidden');
+
+                document.getElementById('banner-siswa')?.classList.remove('hidden');
+                document.getElementById('banner-walikelas')?.classList.add('hidden');
+                document.getElementById('banner-manajemen')?.classList.add('hidden');
+
+                switchTab('menu');
+            } else if (role === 'walikelas') {
+                if (!isWaliKelasUnlocked) {
+                    openModal('modal-walikelas-pin');
+                    const refInput = document.getElementById('input-walikelas-ref');
+                    if (refInput) {
+                        refInput.value = activeWaliKelasRefCode || 'WK-VII1';
+                        refInput.focus();
+                    }
+                    return;
+                }
+
+                if (badge) {
+                    badge.className = 'bg-slate-900 text-white border border-slate-800 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow-2xs';
+                    badge.innerHTML = `<i class="fa-solid fa-user-tie text-blue-400"></i><span>Wali Kelas</span>`;
+                }
+
+                if (siswaNav) siswaNav.classList.add('hidden');
+                if (waliNav) waliNav.classList.remove('hidden');
+                if (manNav) manNav.classList.add('hidden');
+
+                document.getElementById('banner-siswa')?.classList.add('hidden');
+                document.getElementById('banner-walikelas')?.classList.remove('hidden');
+                document.getElementById('banner-manajemen')?.classList.add('hidden');
+
+                switchWaliTab('transactions');
+                renderWaliKelasSummary();
+            } else if (role === 'manajemen') {
+                if (!isManajemenUnlocked) {
+                    openModal('modal-manajemen-pin');
+                    document.getElementById('input-manajemen-pin')?.focus();
+                    return;
+                }
+
+                if (badge) {
+                    badge.className = 'bg-purple-950 text-purple-200 border border-purple-800 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow-2xs';
+                    badge.innerHTML = `<i class="fa-solid fa-user-shield text-purple-400"></i><span>Manajemen</span>`;
+                }
+
+                if (siswaNav) siswaNav.classList.add('hidden');
+                if (waliNav) waliNav.classList.add('hidden');
+                if (manNav) manNav.classList.remove('hidden');
+
+                document.getElementById('banner-siswa')?.classList.add('hidden');
+                document.getElementById('banner-walikelas')?.classList.add('hidden');
+                document.getElementById('banner-manajemen')?.classList.remove('hidden');
+
+                switchManajemenTab('transactions');
+                renderMasterSummary();
+            }
+        }
+
+        async function verifyWaliKelasPin(e) {
+            if (e) e.preventDefault();
+            const refInput = document.getElementById('input-walikelas-ref');
+            const pinInput = document.getElementById('input-walikelas-pin');
+            const errorMsg = document.getElementById('walikelas-pin-error-msg');
+
+            const enteredRef = String(refInput?.value || '').trim().toUpperCase();
+            const enteredPin = String(pinInput?.value || '').trim();
+
+            if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes("TEMPELKAN_URL")) {
+                showToast('Harap atur variabel APPS_SCRIPT_URL di dalam file index.html terlebih dahulu!', 'error');
+                return;
+            }
+
+            try {
+                const res = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'verifyWaliPin', refCode: enteredRef, pin: enteredPin })
+                });
+                const data = await res.json();
+
+                if (data.status === 'success') {
+                    isWaliKelasUnlocked = true;
+                    activeWaliKelasRefCode = enteredRef;
+                    activeClassName = data.className || `Kelas ${enteredRef}`;
+
+                    document.getElementById('active-class-title-banner').innerText = activeClassName.replace(/^Kelas\s*/, '');
+                    document.getElementById('active-ref-code-banner').innerText = activeWaliKelasRefCode;
+                    document.getElementById('active-class-title-table').innerText = activeClassName;
+
+                    const lockIcon = document.getElementById('walikelas-lock-icon');
+                    if (lockIcon) lockIcon.className = 'fa-solid fa-lock-open text-[10px] text-emerald-400';
+
+                    if (errorMsg) errorMsg.classList.add('hidden');
+                    closeModal('modal-walikelas-pin');
+                    showToast(`Login Wali Kelas ${activeClassName} Berhasil! 🏫`, 'success');
+                    setRole('walikelas');
+                } else {
+                    if (errorMsg) {
+                        errorMsg.innerText = data.message || 'Kode Referal atau PIN Salah!';
+                        errorMsg.classList.remove('hidden');
+                    }
+                }
+            } catch (err) {
+                showToast('Gagal terhubung ke Google Sheets!', 'error');
+            }
+        }
+
+        function closeWaliKelasPinModal(e) {
+            if (e) e.preventDefault();
+            closeModal('modal-walikelas-pin');
+            if (currentRole === 'walikelas' && !isWaliKelasUnlocked) setRole('siswa');
+        }
+
+        function lockWaliKelas() {
+            isWaliKelasUnlocked = false;
+            const lockIcon = document.getElementById('walikelas-lock-icon');
+            if (lockIcon) lockIcon.className = 'fa-solid fa-lock text-[10px] text-slate-400';
+            showToast('Sesi Wali Kelas Terkunci', 'info');
+            setRole('siswa');
+        }
+
+        async function verifyManajemenPin(e) {
+            if (e) e.preventDefault();
+            const pinInput = document.getElementById('input-manajemen-pin');
+            const errorMsg = document.getElementById('manajemen-pin-error-msg');
+            const entered = String(pinInput?.value || '').trim();
+
+            if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes("TEMPELKAN_URL")) {
+                showToast('Harap atur variabel APPS_SCRIPT_URL di dalam file index.html terlebih dahulu!', 'error');
+                return;
+            }
+
+            try {
+                const res = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'verifyMasterPin', pin: entered })
+                });
+                const data = await res.json();
+
+                if (data.status === 'success') {
+                    isManajemenUnlocked = true;
+                    const lockIcon = document.getElementById('manajemen-lock-icon');
+                    if (lockIcon) lockIcon.className = 'fa-solid fa-lock-open text-[10px] text-purple-400';
+                    if (errorMsg) errorMsg.classList.add('hidden');
+                    closeModal('modal-manajemen-pin');
+                    showToast('Login Master Admin Manajemen Berhasil! 🛡️', 'success');
+                    setRole('manajemen');
+                } else {
+                    if (errorMsg) errorMsg.classList.remove('hidden');
+                }
+            } catch (err) {
+                showToast('Gagal terhubung ke Google Sheets!', 'error');
+            }
+        }
+
+        function closeManajemenPinModal(e) {
+            if (e) e.preventDefault();
+            closeModal('modal-manajemen-pin');
+            if (currentRole === 'manajemen' && !isManajemenUnlocked) setRole('siswa');
+        }
+
+        function lockManajemen() {
+            isManajemenUnlocked = false;
+            const lockIcon = document.getElementById('manajemen-lock-icon');
+            if (lockIcon) lockIcon.className = 'fa-solid fa-lock text-[10px] text-slate-400';
+            showToast('Sesi Manajemen Terkunci', 'info');
+            setRole('siswa');
+        }
+
+        function switchTab(tab) {
+            hideAllViews();
+            ['nav-btn-menu', 'nav-btn-vouchers', 'nav-btn-cart'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (btn) btn.className = 'py-2.5 px-3 sm:px-4 rounded-xl text-slate-600 hover:bg-slate-100 font-bold flex items-center gap-2 transition';
+            });
+
+            if (tab === 'menu') {
+                document.getElementById('view-menu')?.classList.remove('hidden');
+                const activeBtn = document.getElementById('nav-btn-menu');
+                if (activeBtn) activeBtn.className = 'py-2.5 px-3 sm:px-4 rounded-xl text-emerald-700 bg-emerald-50 font-bold flex items-center gap-2 transition';
+                renderMenu();
+            } else if (tab === 'vouchers') {
+                document.getElementById('view-vouchers')?.classList.remove('hidden');
+                const activeBtn = document.getElementById('nav-btn-vouchers');
+                if (activeBtn) activeBtn.className = 'py-2.5 px-3 sm:px-4 rounded-xl text-emerald-700 bg-emerald-50 font-bold flex items-center gap-2 transition';
+                renderMyVouchers();
+            } else if (tab === 'cart') {
+                document.getElementById('view-cart')?.classList.remove('hidden');
+                const activeBtn = document.getElementById('nav-btn-cart');
+                if (activeBtn) activeBtn.className = 'py-2 px-3 sm:px-4 bg-emerald-700 text-white rounded-xl font-bold flex items-center gap-2 shadow-xs transition';
+                renderCart();
+            }
+        }
+
+        function switchWaliTab(tab) {
+            hideAllViews();
+            const activeBtn = document.getElementById('walikelas-nav-btn-transactions');
+            if (activeBtn) activeBtn.className = 'py-2 sm:py-3 border-b-2 border-emerald-400 text-emerald-400 font-bold flex items-center gap-2 whitespace-nowrap';
+
+            if (tab === 'transactions') {
+                document.getElementById('view-walikelas-transactions')?.classList.remove('hidden');
+                renderWaliKelasTransactions();
+            }
+        }
+
+        function switchManajemenTab(tab) {
+            hideAllViews();
+            ['manajemen-nav-btn-transactions', 'manajemen-nav-btn-rekap', 'manajemen-nav-btn-stok'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (btn) btn.className = 'py-2 sm:py-3 border-b-2 border-transparent hover:text-white font-bold flex items-center gap-2 whitespace-nowrap';
+            });
+
+            if (tab === 'transactions') {
+                document.getElementById('view-manajemen-transactions')?.classList.remove('hidden');
+                const activeBtn = document.getElementById('manajemen-nav-btn-transactions');
+                if (activeBtn) activeBtn.className = 'py-2 sm:py-3 border-b-2 border-purple-400 text-purple-300 font-bold flex items-center gap-2 whitespace-nowrap';
+                renderMasterTransactions();
+            } else if (tab === 'rekap') {
+                document.getElementById('view-manajemen-rekap')?.classList.remove('hidden');
+                const activeBtn = document.getElementById('manajemen-nav-btn-rekap');
+                if (activeBtn) activeBtn.className = 'py-2 sm:py-3 border-b-2 border-purple-400 text-purple-300 font-bold flex items-center gap-2 whitespace-nowrap';
+                renderMasterRekap();
+            } else if (tab === 'stok') {
+                document.getElementById('view-manajemen-stok')?.classList.remove('hidden');
+                const activeBtn = document.getElementById('manajemen-nav-btn-stok');
+                if (activeBtn) activeBtn.className = 'py-2 sm:py-3 border-b-2 border-purple-400 text-purple-300 font-bold flex items-center gap-2 whitespace-nowrap';
+                renderMasterStock();
+            }
+        }
+
+        function setCategoryFilter(cat) {
+            activeCategoryFilter = cat;
+            ['filter-all', 'filter-kecil', 'filter-besar'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (btn) btn.className = 'px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition whitespace-nowrap';
+            });
+            const activeBtn = document.getElementById(`filter-${cat}`);
+            if (activeBtn) activeBtn.className = 'px-3 py-1.5 bg-emerald-600 text-white text-xs font-bold rounded-xl transition whitespace-nowrap';
+            renderMenu();
+        }
+
+        function renderMenu() {
+            const grid = document.getElementById('vouchers-catalog-grid');
+            if (!grid) return;
+
+            let filtered = menuItems;
+            if (activeCategoryFilter !== 'all') {
+                filtered = menuItems.filter(item => item.category === activeCategoryFilter);
+            }
+
+            grid.innerHTML = filtered.map(item => {
+                const isOutOfStock = item.stock <= 0;
+                return `
+                    <div class="rounded-3xl p-5 border-2 ${item.borderClass} shadow-2xs hover:shadow-md transition space-y-4 flex flex-col justify-between relative overflow-hidden">
+                        <div class="flex items-center justify-between">
+                            <div class="w-12 h-12 rounded-2xl bg-white shadow-xs border border-slate-100/80 flex items-center justify-center text-pink-500 text-xl font-black">
+                                <i class="fa-solid fa-ticket"></i>
+                            </div>
+                            <span class="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${isOutOfStock ? 'bg-red-100/80 text-red-600 border border-red-200/60' : 'bg-emerald-100/80 text-emerald-800 border border-emerald-200/60'}">
+                                ${isOutOfStock ? 'HABIS' : 'TERSEDIA'}
+                            </span>
+                        </div>
+
+                        <div class="space-y-0.5">
+                            <p class="text-[10px] font-black uppercase tracking-wider ${item.textBrandClass}">KANTIN SARAS SPENTIG</p>
+                            <h3 class="text-base font-black text-slate-900 tracking-tight">${item.name}</h3>
+                            <p class="text-2xl font-black ${item.priceClass}">${formatRupiah(item.price)}</p>
+                        </div>
+
+                        <button onclick="addToCart('${item.id}')" ${isOutOfStock ? 'disabled' : ''} class="w-full py-2.5 rounded-2xl text-xs font-bold transition flex items-center justify-center gap-1.5 ${isOutOfStock ? 'bg-slate-200/70 text-slate-400 cursor-not-allowed' : item.btnClass}">
+                            + Tambah Ke Keranjang
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function addToCart(itemId) {
+            const item = menuItems.find(m => m.id === itemId);
+            if (!item || item.stock <= 0) return;
+
+            const existing = cart.find(c => c.id === itemId);
+            if (existing) {
+                if (existing.qty < item.stock) {
+                    existing.qty++;
+                } else {
+                    showToast(`Batas stok ${item.name} tercapai!`, 'error');
+                    return;
+                }
+            } else {
+                cart.push({ id: item.id, name: item.name, price: item.price, icon: item.icon, qty: 1 });
+            }
+
+            updateCartBadge();
+            showToast(`${item.name} ditambahkan ke keranjang`, 'success');
+        }
+
+        function updateCartBadge() {
+            const count = cart.reduce((acc, curr) => acc + curr.qty, 0);
+            const badge = document.getElementById('cart-count-badge');
+            if (badge) badge.innerText = count;
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items-container');
+            const totalEl = document.getElementById('cart-total-price');
+            if (!container) return;
+
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 text-slate-400 font-bold text-xs space-y-2"><i class="fa-solid fa-basket-shopping text-3xl"></i><p>Keranjang Anda masih kosong</p></div>`;
+                if (totalEl) totalEl.innerText = formatRupiah(0);
+                return;
+            }
+
+            let total = 0;
+            container.innerHTML = cart.map(item => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+                return `
+                    <div class="flex items-center justify-between bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">${item.icon}</span>
+                            <div>
+                                <h4 class="font-extrabold text-xs text-slate-800">${item.name}</h4>
+                                <p class="text-[11px] text-emerald-700 font-black">${formatRupiah(item.price)} x ${item.qty} = ${formatRupiah(subtotal)}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateCartQty('${item.id}', -1)" class="w-7 h-7 rounded-lg bg-white border border-slate-300 font-black text-slate-700 flex items-center justify-center text-xs hover:bg-slate-100">-</button>
+                            <span class="text-xs font-black w-5 text-center">${item.qty}</span>
+                            <button onclick="updateCartQty('${item.id}', 1)" class="w-7 h-7 rounded-lg bg-white border border-slate-300 font-black text-slate-700 flex items-center justify-center text-xs hover:bg-slate-100">+</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            if (totalEl) totalEl.innerText = formatRupiah(total);
+        }
+
+        function updateCartQty(itemId, change) {
+            const index = cart.findIndex(c => c.id === itemId);
+            if (index === -1) return;
+
+            const mItem = menuItems.find(m => m.id === itemId);
+            if (change > 0 && mItem && cart[index].qty >= mItem.stock) {
+                showToast(`Stok ${mItem.name} tidak mencukupi`, 'error');
+                return;
+            }
+
+            cart[index].qty += change;
+            if (cart[index].qty <= 0) cart.splice(index, 1);
+            updateCartBadge();
+            renderCart();
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCartBadge();
+            renderCart();
+        }
+
+        function handleReferralInput(input) {
+            let val = input.value.toUpperCase().replace(/\s+/g, '');
+            val = val.replace(/WK-VII[.-]/g, 'WK-VII').replace(/WK-VIII[.-]/g, 'WK-VIII').replace(/WK-IX[.-]/g, 'WK-IX');
+            val = val.replace(/^WK-V1111$/, 'WK-VII11').replace(/^WK-V111$/, 'WK-VII1').replace(/^WK-V11$/, 'WK-VII');
+
+            input.value = val;
+            const icon = document.getElementById('referral-valid-icon');
+            const err = document.getElementById('referral-error-msg');
+
+            const isValid = /^WK-(VII|VIII|IX)(1[0-1]|[1-9])$/.test(val);
+            if (isValid) {
+                if (icon) icon.classList.remove('hidden');
+                if (err) err.classList.add('hidden');
+                input.className = "w-full px-4 py-3 bg-emerald-50 border-2 border-emerald-500 rounded-xl text-xs font-black uppercase text-emerald-900 outline-none focus:ring-2 focus:ring-emerald-600 transition tracking-wide";
+            } else {
+                if (icon) icon.classList.add('hidden');
+                if (val.length > 3) {
+                    if (err) err.classList.remove('hidden');
+                    input.className = "w-full px-4 py-3 bg-red-50 border-2 border-red-400 rounded-xl text-xs font-black uppercase text-red-900 outline-none focus:ring-2 focus:ring-red-500 transition tracking-wide";
+                } else {
+                    if (err) err.classList.add('hidden');
+                    input.className = "w-full px-4 py-3 bg-white border-2 border-emerald-500 rounded-xl text-xs font-black uppercase text-emerald-900 outline-none focus:ring-2 focus:ring-emerald-600 transition tracking-wide";
+                }
+            }
+        }
+
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                showToast('Keranjang Anda masih kosong!', 'error');
+                return;
+            }
+
+            const name = document.getElementById('buyer-name')?.value.trim();
+            const bClass = document.getElementById('buyer-class')?.value.trim();
+            const phone = document.getElementById('buyer-phone')?.value.trim();
+            const refCode = document.getElementById('buyer-referral-input')?.value.trim().toUpperCase();
+
+            if (!name || !bClass || !phone || !refCode) {
+                showToast('Harap lengkapi seluruh data nama, kelas, HP, dan kode referal!', 'error');
+                return;
+            }
+
+            if (!/^WK-(VII|VIII|IX)(1[0-1]|[1-9])$/.test(refCode)) {
+                showToast('Format Kode Referal Wali Kelas tidak valid! Wajib diawali "WK-" (Contoh: WK-VII1, WK-IX11)', 'error');
+                return;
+            }
+
+            const total = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+            document.getElementById('qris-modal-amount').innerText = formatRupiah(total);
+            openModal('modal-qris');
+        }
+
+        async function submitOrderWithProof() {
+            const name = document.getElementById('buyer-name').value.trim();
+            const bClass = document.getElementById('buyer-class').value.trim();
+            const nisn = document.getElementById('buyer-nisn').value.trim();
+            const phone = document.getElementById('buyer-phone').value.trim();
+            const refCode = document.getElementById('buyer-referral-input').value.trim().toUpperCase();
+            const fileInput = document.getElementById('input-proof-file');
+
+            const total = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
+
+            let vouchersList = [];
+            cart.forEach(c => {
+                for (let i = 0; i < c.qty; i++) {
+                    vouchersList.push({
+                        id: `VCH-${Date.now()}-${Math.floor(Math.random()*1000)}`,
+                        name: c.name,
+                        price: c.price,
+                        icon: c.icon,
+                        redeemed: false
+                    });
+                }
+            });
+
+            const itemsSummaryStr = cart.map(c => `${c.name} (${c.qty}x)`).join(', ');
+
+            const newOrder = {
+                id: `ORD-${Date.now()}`,
+                date: new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+                buyerName: name,
+                buyerClass: bClass,
+                buyerNisn: nisn,
+                buyerPhone: phone,
+                referralCode: refCode,
+                totalAmount: total,
+                itemsSummary: itemsSummaryStr,
+                vouchers: vouchersList,
+                paymentStatus: 'Belum Bayar',
+                redeemStatus: 'Belum Ditukar',
+                proofUrl: fileInput?.files[0] ? URL.createObjectURL(fileInput.files[0]) : 'https://placehold.co/400x600/065f46/ffffff?text=Bukti+Transfer+Siswa'
+            };
+
+            orders.unshift(newOrder);
+            localStorage.setItem('saras_orders', JSON.stringify(orders));
+
+            if (APPS_SCRIPT_URL) {
+                fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'createOrder',
+                        ...newOrder,
+                        vouchersSummary: cart.map(c => ({ id: c.id, qty: c.qty }))
+                    })
+                }).catch(e => console.warn('Sync order error:', e));
+            }
+
+            closeModal('modal-qris');
+            cart = [];
+            updateCartBadge();
+
+            showToast('Pesanan berhasil dikirim ke Wali Kelas! 🚀', 'success');
+            switchTab('vouchers');
+        }
+
+        function renderMyVouchers() {
+            const container = document.getElementById('vouchers-list-container');
+            if (!container) return;
+
+            if (orders.length === 0) {
+                container.innerHTML = `<div class="text-center py-10 text-slate-400 font-bold text-xs space-y-2"><i class="fa-solid fa-receipt text-4xl"></i><p>Belum ada riwayat pembelian voucher</p></div>`;
+                document.getElementById('unredeemed-badge')?.classList.add('hidden');
+                return;
+            }
+
+            let unredeemedTotal = 0;
+
+            container.innerHTML = orders.map(o => {
+                const isPaid = o.paymentStatus === 'Sudah Bayar';
+
+                o.vouchers.forEach(v => {
+                    if (!v.redeemed) unredeemedTotal++;
+                });
+
+                return `
+                    <div class="bg-slate-50 p-4 sm:p-5 rounded-3xl border border-slate-200/90 space-y-4">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 border-b border-slate-200/80 pb-3">
+                            <div>
+                                <span class="bg-emerald-100 text-emerald-900 px-2.5 py-0.5 rounded-md font-mono text-xs font-black">${o.referralCode}</span>
+                                <h4 class="font-extrabold text-sm text-slate-900 mt-1">${o.buyerName} (${o.buyerClass})</h4>
+                                <p class="text-[11px] text-slate-500 font-bold">${o.date} • ${o.itemsSummary}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-black text-emerald-700">${formatRupiah(o.totalAmount)}</p>
+                                <span class="text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full ${isPaid ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-700'}">
+                                    ${o.paymentStatus}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            ${o.vouchers.map(v => `
+                                <div class="bg-white p-3 rounded-2xl border border-slate-200/80 flex items-center justify-between">
+                                    <div class="flex items-center gap-2.5">
+                                        <span class="text-xl">${v.icon}</span>
+                                        <div>
+                                            <p class="font-bold text-xs text-slate-800">${v.name}</p>
+                                            <p class="text-[10px] text-slate-400 font-mono">${v.id}</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full ${v.redeemed ? 'bg-slate-100 text-slate-500' : 'bg-amber-100 text-amber-900'}">
+                                        ${v.redeemed ? 'Sudah Diambil' : 'Siap Diambil'}
+                                    </span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const badge = document.getElementById('unredeemed-badge');
+            if (badge) {
+                if (unredeemedTotal > 0) {
+                    badge.innerText = unredeemedTotal;
+                    badge.classList.remove('hidden');
+                } else {
+                    badge.classList.add('hidden');
+                }
+            }
+        }
+
+        function renderWaliKelasSummary() {
+            let classOmset = 0;
+            let paidCount = 0;
+            let totalVouchers = 0;
+            let unredeemedVouchers = 0;
+            const classBuyers = new Set();
+
+            orders.forEach(o => {
+                if (String(o.referralCode || '').toUpperCase() === activeWaliKelasRefCode) {
+                    if (o.buyerName) classBuyers.add(o.buyerName.toLowerCase().trim());
+                    const isPaid = o.paymentStatus === 'Sudah Bayar';
+                    if (isPaid) {
+                        classOmset += Number(o.totalAmount || 0);
+                        paidCount++;
+                    }
+
+                    if (o.vouchers && Array.isArray(o.vouchers)) {
+                        o.vouchers.forEach(v => {
+                            totalVouchers++;
+                            if (isPaid && !v.redeemed) unredeemedVouchers++;
+                        });
+                    }
+                }
+            });
+
+            document.getElementById('stat-wali-omset').innerText = formatRupiah(classOmset);
+            document.getElementById('stat-wali-paid-count').innerText = `${paidCount} Pesanan Lunas`;
+            document.getElementById('stat-wali-vouchers-total').innerText = `${totalVouchers} Lembar`;
+            document.getElementById('stat-wali-unredeemed').innerText = `${unredeemedVouchers} Lembar`;
+            document.getElementById('stat-wali-buyers-count').innerText = `${classBuyers.size} Siswa`;
+        }
+
+        function renderWaliKelasTransactions() {
+            const tbody = document.getElementById('walikelas-transactions-tbody');
+            if (!tbody) return;
+
+            const search = (document.getElementById('wali-search-input')?.value || '').toLowerCase().trim();
+            const statusFilter = document.getElementById('wali-status-filter')?.value || 'all';
+
+            let classOrders = orders.filter(o => String(o.referralCode || '').toUpperCase() === activeWaliKelasRefCode);
+
+            if (search) {
+                classOrders = classOrders.filter(o => 
+                    (o.buyerName && o.buyerName.toLowerCase().includes(search)) ||
+                    (o.buyerNisn && o.buyerNisn.toLowerCase().includes(search))
+                );
+            }
+
+            if (statusFilter === 'unpaid') classOrders = classOrders.filter(o => o.paymentStatus === 'Belum Bayar');
+            else if (statusFilter === 'paid') classOrders = classOrders.filter(o => o.paymentStatus === 'Sudah Bayar');
+            else if (statusFilter === 'unredeemed') classOrders = classOrders.filter(o => o.redeemStatus !== 'Sudah Ditukar');
+            else if (statusFilter === 'redeemed') classOrders = classOrders.filter(o => o.redeemStatus === 'Sudah Ditukar');
+
+            if (classOrders.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="text-center py-8 text-slate-400 text-xs font-bold">Belum ada transaksi siswa untuk kelas ${activeClassName}.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = classOrders.map((o, idx) => {
+                const isPaid = o.paymentStatus === 'Sudah Bayar';
+                const isRedeemed = o.redeemStatus === 'Sudah Ditukar';
+
+                return `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="p-3.5 text-xs font-bold text-slate-500">${idx + 1}</td>
+                        <td class="p-3.5">
+                            <p class="text-xs font-black text-slate-800">${o.buyerName}</p>
+                            <p class="text-[10px] text-slate-500 font-semibold">NISN: ${o.buyerNisn || '-'} • HP: ${o.buyerPhone}</p>
+                        </td>
+                        <td class="p-3.5 text-xs font-bold text-slate-700">${o.itemsSummary}</td>
+                        <td class="p-3.5 text-xs font-black text-emerald-700">${formatRupiah(o.totalAmount)}</td>
+                        <td class="p-3.5">
+                            <a href="${o.proofUrl}" target="_blank" class="text-xs text-blue-600 hover:underline font-bold flex items-center gap-1">
+                                <i class="fa-solid fa-image"></i> Lihat Bukti
+                            </a>
+                        </td>
+                        <td class="p-3.5">
+                            <button onclick="togglePaymentStatus('${o.id}')" class="text-[10px] font-black uppercase px-2.5 py-1 rounded-full transition ${isPaid ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-red-100 text-red-700 hover:bg-red-200'}">
+                                ${o.paymentStatus || 'Belum Bayar'}
+                            </button>
+                        </td>
+                        <td class="p-3.5 text-right">
+                            <button onclick="deliverAllVouchers('${o.id}')" ${!isPaid || isRedeemed ? 'disabled' : ''} class="px-3 py-1.5 rounded-xl text-xs font-extrabold transition ${isPaid && !isRedeemed ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs' : 'bg-slate-100 text-slate-400 cursor-not-allowed'}">
+                                <i class="fa-solid fa-check-double"></i> ${isRedeemed ? 'Sudah Diserahkan' : 'Serahkan Semua (1-Klik)'}
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        async function togglePaymentStatus(orderId) {
+            const order = orders.find(o => o.id === orderId);
+            if (!order) return;
+
+            const nextStatus = order.paymentStatus === 'Sudah Bayar' ? 'Belum Bayar' : 'Sudah Bayar';
+            order.paymentStatus = nextStatus;
+            localStorage.setItem('saras_orders', JSON.stringify(orders));
+
+            if (APPS_SCRIPT_URL) {
+                fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'updateOrderStatus', orderId: orderId, paymentStatus: nextStatus })
+                }).catch(e => console.warn(e));
+            }
+
+            renderWaliKelasSummary();
+            renderWaliKelasTransactions();
+            showToast(`Status bayar ${order.buyerName} diperbarui`, 'success');
+        }
+
+        async function deliverAllVouchers(orderId) {
+            const order = orders.find(o => o.id === orderId);
+            if (!order) return;
+
+            order.vouchers.forEach(v => v.redeemed = true);
+            order.redeemStatus = 'Sudah Ditukar';
+
+            localStorage.setItem('saras_orders', JSON.stringify(orders));
+
+            if (APPS_SCRIPT_URL) {
+                fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ action: 'updateOrderStatus', orderId: orderId, redeemStatus: 'Sudah Ditukar' })
+                }).catch(e => console.warn(e));
+            }
+
+            renderWaliKelasSummary();
+            renderWaliKelasTransactions();
+            showToast(`Voucher fisik ${order.buyerName} diserahkan! 🎉`, 'success');
+        }
+
+        function renderMasterSummary() {
+            let totalOmset = 0;
+            let paidCount = 0;
+            let totalVouchers = 0;
+            let unredeemedVouchers = 0;
+            const activeClassesSet = new Set();
+
+            orders.forEach(o => {
+                if (o.referralCode) activeClassesSet.add(o.referralCode.toUpperCase());
+                const isPaid = o.paymentStatus === 'Sudah Bayar';
+                if (isPaid) {
+                    totalOmset += Number(o.totalAmount || 0);
+                    paidCount++;
+                }
+
+                if (o.vouchers && Array.isArray(o.vouchers)) {
+                    o.vouchers.forEach(v => {
+                        totalVouchers++;
+                        if (isPaid && (!v.redeemed && o.redeemStatus !== 'Sudah Ditukar')) {
+                            unredeemedVouchers++;
+                        }
+                    });
+                }
+            });
+
+            document.getElementById('stat-master-omset').innerText = formatRupiah(totalOmset);
+            document.getElementById('stat-master-paid-count').innerText = `${paidCount} Transaksi Lunas`;
+            document.getElementById('stat-master-vouchers-total').innerText = `${totalVouchers} Lembar`;
+            document.getElementById('stat-master-unredeemed').innerText = `${unredeemedVouchers} Lembar`;
+            document.getElementById('stat-master-active-classes').innerText = `${activeClassesSet.size} Kelas`;
+        }
+
+        function renderMasterTransactions() {
+            const tbody = document.getElementById('master-transactions-tbody');
+            if (!tbody) return;
+
+            const search = (document.getElementById('master-search-input')?.value || '').toLowerCase().trim();
+            const classFilter = document.getElementById('master-class-filter')?.value || 'all';
+            const statusFilter = document.getElementById('master-status-filter')?.value || 'all';
+
+            let filtered = [...orders];
+
+            if (classFilter !== 'all') {
+                filtered = filtered.filter(o => String(o.referralCode || '').toUpperCase().includes(classFilter));
+            }
+
+            if (search) {
+                filtered = filtered.filter(o => 
+                    (o.buyerName && o.buyerName.toLowerCase().includes(search)) ||
+                    (o.buyerNisn && o.buyerNisn.toLowerCase().includes(search)) ||
+                    (o.referralCode && o.referralCode.toLowerCase().includes(search)) ||
+                    (o.buyerClass && o.buyerClass.toLowerCase().includes(search))
+                );
+            }
+
+            if (statusFilter === 'unpaid') filtered = filtered.filter(o => o.paymentStatus === 'Belum Bayar');
+            else if (statusFilter === 'paid') filtered = filtered.filter(o => o.paymentStatus === 'Sudah Bayar');
+            else if (statusFilter === 'unredeemed') filtered = filtered.filter(o => o.redeemStatus !== 'Sudah Ditukar');
+            else if (statusFilter === 'redeemed') filtered = filtered.filter(o => o.redeemStatus === 'Sudah Ditukar');
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="text-center py-8 text-slate-400 text-xs font-bold">Tidak ada data transaksi yang sesuai filter.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map((o, idx) => `
+                <tr class="hover:bg-purple-50/30 transition">
+                    <td class="p-3.5 text-xs font-bold text-slate-500">${idx + 1}</td>
+                    <td class="p-3.5 text-xs font-bold text-slate-800">${o.date}</td>
+                    <td class="p-3.5">
+                        <span class="bg-purple-100 text-purple-900 px-2 py-0.5 rounded-md font-mono text-xs font-black">${o.referralCode || '-'}</span>
+                    </td>
+                    <td class="p-3.5">
+                        <p class="text-xs font-black text-slate-800">${o.buyerName}</p>
+                        <p class="text-[10px] text-slate-500 font-semibold">Kelas: ${o.buyerClass} • NISN: ${o.buyerNisn || '-'}</p>
+                    </td>
+                    <td class="p-3.5 text-xs font-bold text-slate-700">${o.itemsSummary}</td>
+                    <td class="p-3.5 text-xs font-black text-emerald-600">${formatRupiah(o.totalAmount)}</td>
+                    <td class="p-3.5">
+                        <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full ${o.paymentStatus === 'Sudah Bayar' ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-700'}">
+                            ${o.paymentStatus || 'Belum Bayar'}
+                        </span>
+                    </td>
+                    <td class="p-3.5">
+                        <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full ${o.redeemStatus === 'Sudah Ditukar' ? 'bg-slate-200 text-slate-700' : 'bg-amber-100 text-amber-900'}">
+                            ${o.redeemStatus || 'Belum Ditukar'}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderMasterRekap() {
+            const tbody = document.getElementById('master-rekap-tbody');
+            if (!tbody) return;
+
+            const rekapMap = new Map();
+
+            ['VII', 'VIII', 'IX'].forEach(grade => {
+                for (let i = 1; i <= 11; i++) {
+                    const ref = `WK-${grade}${i}`;
+                    rekapMap.set(ref, {
+                        refCode: ref,
+                        className: `Kelas ${grade}.${i}`,
+                        buyersCount: new Set(),
+                        totalVouchers: 0,
+                        unredeemedVouchers: 0,
+                        totalOmset: 0
+                    });
+                }
+            });
+
+            orders.forEach(o => {
+                const ref = String(o.referralCode || '').toUpperCase();
+                let item = rekapMap.get(ref);
+                if (!item && ref) {
+                    item = { refCode: ref, className: `Kelas ${ref}`, buyersCount: new Set(), totalVouchers: 0, unredeemedVouchers: 0, totalOmset: 0 };
+                    rekapMap.set(ref, item);
+                }
+
+                if (item) {
+                    if (o.buyerName) item.buyersCount.add(o.buyerName.toLowerCase().trim());
+                    const isPaid = o.paymentStatus === 'Sudah Bayar';
+                    if (isPaid) item.totalOmset += Number(o.totalAmount || 0);
+
+                    if (o.vouchers && Array.isArray(o.vouchers)) {
+                        o.vouchers.forEach(v => {
+                            item.totalVouchers++;
+                            if (isPaid && (!v.redeemed && o.redeemStatus !== 'Sudah Ditukar')) {
+                                item.unredeemedVouchers++;
+                            }
+                        });
+                    }
+                }
+            });
+
+            const rows = Array.from(rekapMap.values());
+
+            tbody.innerHTML = rows.map(r => `
+                <tr class="hover:bg-slate-50 transition border-b border-slate-100">
+                    <td class="p-3.5"><span class="bg-purple-100 text-purple-900 px-2 py-0.5 rounded-md font-mono text-xs font-black">${r.refCode}</span></td>
+                    <td class="p-3.5 font-bold text-slate-800">${r.className}</td>
+                    <td class="p-3.5 text-center font-bold text-purple-700">${r.buyersCount.size} Siswa</td>
+                    <td class="p-3.5 text-center font-bold text-slate-700">${r.totalVouchers} Lembar</td>
+                    <td class="p-3.5 text-center font-bold ${r.unredeemedVouchers > 0 ? 'text-amber-600' : 'text-slate-400'}">${r.unredeemedVouchers} Lembar</td>
+                    <td class="p-3.5 text-right font-black text-emerald-600">${formatRupiah(r.totalOmset)}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderMasterStock() {
+            const grid = document.getElementById('master-stock-grid');
+            if (!grid) return;
+
+            grid.innerHTML = menuItems.map(item => `
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/90 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-3xl">${item.icon}</span>
+                        <span class="text-xs font-black text-purple-900 bg-purple-100 px-2.5 py-1 rounded-full">${formatRupiah(item.price)}</span>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-slate-800 text-sm">${item.name}</h4>
+                        <p class="text-xs text-slate-500 font-medium">Stok Saat Ini: <b class="text-slate-900 text-sm">${item.stock} pcs</b></p>
+                    </div>
+                    <div class="flex items-center gap-2 pt-1">
+                        <input type="number" id="input-stock-${item.id}" value="${item.stock}" min="0" class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-black outline-none focus:ring-2 focus:ring-purple-500">
+                        <button onclick="updateMasterStockItem('${item.id}')" class="bg-purple-900 hover:bg-purple-950 text-white px-3 py-2 rounded-xl text-xs font-extrabold transition shrink-0">Simpan</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function updateMasterStockItem(itemId) {
+            const input = document.getElementById(`input-stock-${itemId}`);
+            if (!input) return;
+            const newStock = Math.max(0, parseInt(input.value) || 0);
+
+            const mItem = menuItems.find(m => m.id === itemId);
+            if (mItem) {
+                mItem.stock = newStock;
+
+                if (APPS_SCRIPT_URL) {
+                    fetch(APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        body: JSON.stringify({ action: 'updateStock', itemId: itemId, newStock: newStock })
+                    }).catch(e => console.warn(e));
+                }
+
+                renderMenu();
+                renderMasterStock();
+                showToast(`Stok ${mItem.name} diperbarui ke ${newStock} pcs`, 'success');
+            }
+        }
+
+        function exportMasterToExcel() {
+            if (orders.length === 0) {
+                showToast('Belum ada data transaksi sekolah untuk diexport!', 'error');
+                return;
+            }
+
+            let csvContent = "\uFEFF";
+            csvContent += "Tanggal,Kode Referal,Nama Siswa,NISN,Kelas,No HP,Item,Total,Status Bayar,Status Diserahkan\n";
+
+            orders.forEach(o => {
+                const cleanDate = String(o.date || '').replace(/"/g, '""');
+                const cleanName = String(o.buyerName || '').replace(/"/g, '""');
+                const cleanClass = String(o.buyerClass || '').replace(/"/g, '""');
+                const cleanItems = String(o.itemsSummary || '').replace(/"/g, '""');
+                csvContent += `"${cleanDate}","${o.referralCode || ''}","${cleanName}","'${o.buyerNisn || ''}","${cleanClass}","'${o.buyerPhone || ''}","${cleanItems}","${o.totalAmount}","${o.paymentStatus || 'Belum Bayar'}","${o.redeemStatus || 'Belum Ditukar'}"\n`;
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", `Master_Laporan_Kantin_Spentig_${Date.now()}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            showToast('Laporan Master Seluruh Sekolah berhasil diunduh!', 'success');
+        }
+
+        window.onload = function() {
+            const savedOrders = localStorage.getItem('saras_orders');
+            if (savedOrders) {
+                try {
+                    orders = JSON.parse(savedOrders);
+                } catch(e) { console.error('Parse order cache error', e); }
+            }
+
+            renderMenu();
+            renderMyVouchers();
+
+            if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes("TEMPELKAN_URL")) {
+                fetchLiveData();
+            }
+        };
+    </script>
+</body>
+</html>
