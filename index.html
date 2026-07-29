@@ -132,10 +132,10 @@
     </nav>
 
     <!-- Manajemen Navigation -->
-    <nav id="manajemen-nav" class="hidden bg-purple-950 text-purple-200 border-b border-purple-800 sticky top-[61px] z-30 shadow-md">
+    <nav id="manajemen-nav" class="hidden bg-slate-900 text-slate-100 border-b border-indigo-900/60 sticky top-[61px] z-30 shadow-md">
         <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 py-2 sm:py-0">
             <div class="flex gap-4 sm:gap-6 text-xs sm:text-sm font-bold overflow-x-auto no-scrollbar py-1">
-                <button onclick="switchManajemenTab('transactions')" id="manajemen-nav-btn-transactions" class="py-2 sm:py-3 border-b-2 border-purple-400 text-purple-300 font-bold flex items-center gap-2 whitespace-nowrap">
+                <button onclick="switchManajemenTab('transactions')" id="manajemen-nav-btn-transactions" class="py-2 sm:py-3 border-b-2 border-cyan-400 text-cyan-300 font-bold flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-list-check"></i> Seluruh Transaksi Sekolah
                 </button>
                 <button onclick="switchManajemenTab('rekap')" id="manajemen-nav-btn-rekap" class="py-2 sm:py-3 border-b-2 border-transparent hover:text-white font-bold flex items-center gap-2 whitespace-nowrap">
@@ -211,42 +211,42 @@
         </div>
 
         <!-- Banner Manajemen -->
-        <div id="banner-manajemen" class="hidden bg-gradient-to-br from-purple-950 via-slate-900 to-indigo-950 text-white rounded-3xl p-5 shadow-xl border border-purple-800/60 space-y-4 relative overflow-hidden">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-purple-800/80 pb-3">
+        <div id="banner-manajemen" class="hidden bg-gradient-to-r from-slate-950 via-indigo-950 to-slate-900 text-white rounded-3xl p-5 shadow-xl border border-indigo-800/50 space-y-4 relative overflow-hidden">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-indigo-800/80 pb-3">
                 <div>
                     <h2 class="font-black text-base sm:text-lg tracking-tight flex items-center gap-2">
-                        <i class="fa-solid fa-school-flag text-purple-400"></i> Master Dashboard Manajemen Kantin Sekolah
+                        <i class="fa-solid fa-school-flag text-cyan-400"></i> Master Dashboard Manajemen Kantin Sekolah
                     </h2>
-                    <p class="text-xs text-purple-300/80">Pengawasan Laporan Transaksi Seluruh Kelas (UPT SPF SMPN 3 Makassar)</p>
+                    <p class="text-xs text-indigo-200/80">Pengawasan Laporan Transaksi Seluruh Kelas (UPT SPF SMPN 3 Makassar)</p>
                 </div>
-                <span class="text-[11px] font-extrabold bg-purple-900/80 text-purple-300 px-3 py-1 rounded-full border border-purple-700/80 self-start sm:self-auto flex items-center gap-1.5">
-                    <i class="fa-solid fa-user-shield text-purple-400"></i> Mode Super Admin
+                <span class="text-[11px] font-extrabold bg-indigo-900/80 text-cyan-300 px-3 py-1 rounded-full border border-cyan-500/30 self-start sm:self-auto flex items-center gap-1.5">
+                    <i class="fa-solid fa-user-shield text-cyan-400"></i> Mode Super Admin
                 </span>
             </div>
 
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                <div class="bg-purple-900/40 p-3.5 rounded-2xl border border-purple-700/50 space-y-1">
-                    <p class="text-[10px] font-black uppercase text-purple-300 tracking-wider">Omset Seluruh Sekolah</p>
+                <div class="bg-indigo-950/50 p-3.5 rounded-2xl border border-indigo-800/60 space-y-1">
+                    <p class="text-[10px] font-black uppercase text-indigo-300 tracking-wider">Omset Seluruh Sekolah</p>
                     <p id="stat-master-omset" class="text-lg sm:text-xl font-black text-emerald-400">Rp 0</p>
-                    <p id="stat-master-paid-count" class="text-[10px] text-purple-300/80 font-bold">0 Transaksi Lunas</p>
+                    <p id="stat-master-paid-count" class="text-[10px] text-indigo-300/80 font-bold">0 Transaksi Lunas</p>
                 </div>
 
-                <div class="bg-purple-900/40 p-3.5 rounded-2xl border border-purple-700/50 space-y-1">
-                    <p class="text-[10px] font-black uppercase text-purple-300 tracking-wider">Total Voucher</p>
-                    <p id="stat-master-vouchers-total" class="text-lg sm:text-xl font-black text-blue-400">0</p>
-                    <p class="text-[10px] text-purple-300/80 font-bold">Terjual Seluruh Kelas</p>
+                <div class="bg-indigo-950/50 p-3.5 rounded-2xl border border-indigo-800/60 space-y-1">
+                    <p class="text-[10px] font-black uppercase text-indigo-300 tracking-wider">Total Voucher</p>
+                    <p id="stat-master-vouchers-total" class="text-lg sm:text-xl font-black text-cyan-300">0</p>
+                    <p class="text-[10px] text-indigo-300/80 font-bold">Terjual Seluruh Kelas</p>
                 </div>
 
-                <div class="bg-purple-900/40 p-3.5 rounded-2xl border border-purple-700/50 space-y-1">
-                    <p class="text-[10px] font-black uppercase text-purple-300 tracking-wider">Belum Diserahkan</p>
+                <div class="bg-indigo-950/50 p-3.5 rounded-2xl border border-indigo-800/60 space-y-1">
+                    <p class="text-[10px] font-black uppercase text-indigo-300 tracking-wider">Belum Diserahkan</p>
                     <p id="stat-master-unredeemed" class="text-lg sm:text-xl font-black text-amber-400">0</p>
-                    <p class="text-[10px] text-purple-300/80 font-bold">Menunggu Wali Kelas</p>
+                    <p class="text-[10px] text-indigo-300/80 font-bold">Menunggu Wali Kelas</p>
                 </div>
 
-                <div class="bg-purple-900/40 p-3.5 rounded-2xl border border-purple-700/50 space-y-1">
-                    <p class="text-[10px] font-black uppercase text-purple-300 tracking-wider">Kelas Aktif</p>
-                    <p id="stat-master-active-classes" class="text-lg sm:text-xl font-black text-purple-200">0 Kelas</p>
-                    <p class="text-[10px] text-purple-300/80 font-bold">Pernah Membeli</p>
+                <div class="bg-indigo-950/50 p-3.5 rounded-2xl border border-indigo-800/60 space-y-1">
+                    <p class="text-[10px] font-black uppercase text-indigo-300 tracking-wider">Kelas Aktif</p>
+                    <p id="stat-master-active-classes" class="text-lg sm:text-xl font-black text-indigo-200">0 Kelas</p>
+                    <p class="text-[10px] text-indigo-300/80 font-bold">Pernah Membeli</p>
                 </div>
             </div>
         </div>
@@ -418,11 +418,11 @@
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-4">
                     <div>
                         <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-layer-group text-purple-600"></i> Seluruh Transaksi Kantin Sekolah
+                            <i class="fa-solid fa-layer-group text-indigo-600"></i> Seluruh Transaksi Kantin Sekolah
                         </h2>
                         <p class="text-xs text-slate-500">Monitor transaksi dari seluruh angkatan (Kelas VII, VIII, IX)</p>
                     </div>
-                    <button onclick="exportMasterToExcel()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-md flex items-center justify-center gap-2 transition">
+                    <button onclick="exportMasterToExcel()" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold shadow-md flex items-center justify-center gap-2 transition">
                         <i class="fa-solid fa-file-excel"></i> Export Rekap Master (Excel)
                     </button>
                 </div>
@@ -430,7 +430,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div class="relative">
                         <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-xs"></i>
-                        <input type="text" id="master-search-input" onkeyup="renderMasterTransactions()" placeholder="Cari Nama Siswa, NISN, atau Kode..." class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none focus:ring-2 focus:ring-purple-500 transition">
+                        <input type="text" id="master-search-input" onkeyup="renderMasterTransactions()" placeholder="Cari Nama Siswa, NISN, atau Kode..." class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs outline-none focus:ring-2 focus:ring-indigo-500 transition">
                     </div>
                     <select id="master-class-filter" onchange="renderMasterTransactions()" class="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-700 outline-none">
                         <option value="all">Semua Kelas & Angkatan</option>
@@ -449,7 +449,7 @@
 
                 <div class="overflow-x-auto rounded-2xl border border-slate-200">
                     <table class="w-full text-left border-collapse">
-                        <thead class="bg-slate-50 border-b border-slate-200 text-[11px] font-black text-slate-600 uppercase tracking-wider">
+                        <thead class="bg-slate-900 border-b border-slate-800 text-[11px] font-black text-cyan-300 uppercase tracking-wider">
                             <tr>
                                 <th class="p-3.5">#</th>
                                 <th class="p-3.5">Tanggal</th>
@@ -472,14 +472,14 @@
             <div class="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-4">
                 <div class="border-b border-slate-100 pb-3">
                     <h2 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
-                        <i class="fa-solid fa-chart-line text-purple-600"></i> Rekapitulasi Omset Per Kelas (33 Kelas)
+                        <i class="fa-solid fa-chart-line text-indigo-600"></i> Rekapitulasi Omset Per Kelas (33 Kelas)
                     </h2>
                     <p class="text-xs text-slate-500">Peringkat dan rincian transaksi tiap kelas di bawah pengawasan Wali Kelas</p>
                 </div>
 
                 <div class="overflow-x-auto rounded-2xl border border-slate-200">
                     <table class="w-full text-left border-collapse">
-                        <thead class="bg-purple-950 text-white text-[11px] font-black uppercase tracking-wider">
+                        <thead class="bg-slate-900 text-cyan-300 text-[11px] font-black uppercase tracking-wider border-b border-slate-800">
                             <tr>
                                 <th class="p-3.5">Kode Referal</th>
                                 <th class="p-3.5">Nama Kelas</th>
@@ -499,18 +499,31 @@
 
     <!-- MODAL: QRIS CHECKOUT -->
     <div id="modal-qris" onclick="if(event.target === this) closeModal('modal-qris')" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-5 border border-slate-100 relative max-h-[90vh] overflow-y-auto">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-5 border border-slate-100 relative max-h-[92vh] overflow-y-auto">
             <div class="text-center space-y-1">
                 <span class="bg-emerald-100 text-emerald-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Pembayaran Resmi QRIS</span>
                 <h3 class="text-base font-black text-slate-900">Scan & Unggah Bukti Transfer</h3>
                 <p class="text-xs text-slate-500">Simpan bukti transfer untuk dikonfirmasi Wali Kelas</p>
             </div>
 
-            <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl text-center space-y-3">
-                <img src="https://lh3.googleusercontent.com/d/1gfnoNSW0_cYct_q1YCaM_JQ0cAUa8-Vq" alt="QRIS Code" class="w-48 h-48 mx-auto rounded-xl shadow-md border border-slate-200">
+            <!-- Enhanced & Enlarged QRIS Box -->
+            <div class="bg-slate-50 border-2 border-emerald-100 p-5 rounded-3xl text-center space-y-4 shadow-xs relative">
+                <!-- QRIS Display Image (Image 1 - Enlarged View) -->
+                <div class="relative group inline-block">
+                    <img id="qris-display-img" src="https://placehold.co/500x500/065f46/ffffff?text=QRIS+SPENTIG+KANTIN" alt="QRIS Display Code" class="w-64 h-64 sm:w-72 sm:h-72 mx-auto rounded-2xl shadow-md border-2 border-white object-contain bg-white p-2">
+                </div>
+
+                <!-- Download Button inside QRIS Box (Downloads Image 2) -->
                 <div>
+                    <button onclick="downloadQrisImage()" type="button" class="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md hover:shadow-lg transition active:scale-95 cursor-pointer">
+                        <i class="fa-solid fa-arrow-down text-[11px]"></i> Unduh QRIS
+                    </button>
+                    <p class="text-[10px] text-slate-400 font-medium mt-1">Unduh gambar QRIS beresolusi tinggi ke HP/Laptop</p>
+                </div>
+
+                <div class="pt-2 border-t border-slate-200/80">
                     <p class="text-xs font-bold text-slate-600">NMH: Kantin Digital Spentig</p>
-                    <p id="qris-modal-amount" class="text-xl font-black text-emerald-700">Rp 0</p>
+                    <p id="qris-modal-amount" class="text-2xl font-black text-emerald-700">Rp 0</p>
                 </div>
             </div>
 
@@ -612,7 +625,7 @@
     <!-- MODAL: MANAJEMEN LOGIN -->
     <div id="modal-manajemen-pin" onclick="if(event.target === this) closeManajemenPinModal(event)" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-xs w-full p-6 shadow-2xl space-y-4 border border-slate-100 text-center relative">
-            <div class="w-12 h-12 rounded-2xl bg-purple-950 text-white flex items-center justify-center text-xl mx-auto shadow-md">
+            <div class="w-12 h-12 rounded-2xl bg-slate-900 text-cyan-400 flex items-center justify-center text-xl mx-auto shadow-md border border-indigo-800">
                 <i class="fa-solid fa-user-shield"></i>
             </div>
             <div>
@@ -624,7 +637,7 @@
                 <div class="space-y-1 text-left relative">
                     <label class="block text-[11px] font-extrabold text-slate-700">PIN Keamanan Master</label>
                     <div class="relative">
-                        <input type="password" id="input-manajemen-pin" maxlength="20" placeholder="Masukkan PIN Master" class="w-full text-center tracking-widest text-base font-bold py-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-purple-500 pr-10">
+                        <input type="password" id="input-manajemen-pin" maxlength="20" placeholder="Masukkan PIN Master" class="w-full text-center tracking-widest text-base font-bold py-2.5 bg-slate-50 border border-slate-300 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500 pr-10">
                         <button type="button" onclick="togglePinVisibility('input-manajemen-pin', 'toggle-man-icon')" class="absolute right-3 top-3 text-slate-400 hover:text-slate-600">
                             <i id="toggle-man-icon" class="fa-solid fa-eye text-xs"></i>
                         </button>
@@ -637,7 +650,7 @@
                     <button type="button" onclick="closeManajemenPinModal(event)" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-xl font-bold text-xs transition">
                         Batal
                     </button>
-                    <button type="submit" class="flex-1 bg-purple-900 hover:bg-purple-950 text-white py-2.5 rounded-xl font-bold text-xs shadow-md transition">
+                    <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2.5 rounded-xl font-bold text-xs shadow-md transition">
                         Masuk
                     </button>
                 </div>
@@ -650,7 +663,13 @@
 
     <script>
         // URL Google Apps Script Web App (Tempelkan URL Web App Anda di sini)
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxsa5-1VhxJFFTAK2epKS5UsmttLyuCDEc_9TnUR-aoDIHpACliiQuXZEjgxDO_1gV9aA/exec";
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyYueBVxiOCMolxVERY8GS_9ySbhjvtVLb7oT1Cxs3R-i9xa6EHrodP6T5yRC2RdNNy/exec";
+
+        // URL Gambar QRIS: 
+        // 1. QRIS_DISPLAY_URL : Ditampilkan di Layar Modal Checkout
+        // 2. QRIS_DOWNLOAD_URL: Dinduh saat tombol "Unduh QRIS" ditekan
+        const QRIS_DISPLAY_URL = "https://lh3.googleusercontent.com/d/1gfnoNSW0_cYct_q1YCaM_JQ0cAUa8-Vq";
+        const QRIS_DOWNLOAD_URL = "https://placehold.co/800x800/065f46/ffffff?text=UNDUH+QRIS+SPENTIG+HD";
 
         // Global Application State
         let currentRole = 'siswa';
@@ -666,6 +685,106 @@
         let cart = [];
         let orders = [];
 
+        // Modal, Toast & UI Helper Functions
+        function openModal(modalId) {
+            const el = document.getElementById(modalId);
+            if (el) el.classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            const el = document.getElementById(modalId);
+            if (el) el.classList.add('hidden');
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            const bgColors = {
+                success: 'bg-emerald-600 text-white',
+                error: 'bg-red-600 text-white',
+                info: 'bg-slate-800 text-white'
+            };
+            const icons = {
+                success: 'fa-circle-check',
+                error: 'fa-circle-exclamation',
+                info: 'fa-circle-info'
+            };
+
+            toast.className = `pointer-events-auto flex items-center gap-2.5 px-4 py-3 rounded-2xl shadow-xl text-xs font-bold transition transform translate-y-2 opacity-0 ${bgColors[type] || bgColors.info}`;
+            toast.innerHTML = `<i class="fa-solid ${icons[type] || icons.info} text-sm"></i> <span>${message}</span>`;
+
+            container.appendChild(toast);
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        function previewProof(proofUrl, buyerName) {
+            const titleEl = document.getElementById('proof-modal-title');
+            const imgEl = document.getElementById('proof-preview-img');
+            const loadingEl = document.getElementById('proof-preview-loading');
+            const errorEl = document.getElementById('proof-preview-error');
+            const downloadBtn = document.getElementById('proof-download-btn');
+            const externalLink = document.getElementById('proof-external-link');
+
+            if (titleEl) titleEl.innerText = `Bukti Transfer - ${buyerName || 'Siswa'}`;
+
+            if (loadingEl) loadingEl.classList.remove('hidden');
+            if (imgEl) imgEl.classList.add('hidden');
+            if (errorEl) errorEl.classList.add('hidden');
+
+            const targetUrl = proofUrl || 'https://lh3.googleusercontent.com/d/11SWox-f4kXiuBkU3314nBp7eCQdWMz76';
+
+            if (downloadBtn) downloadBtn.href = targetUrl;
+            if (externalLink) externalLink.href = targetUrl;
+
+            if (imgEl) {
+                imgEl.onload = function() {
+                    if (loadingEl) loadingEl.classList.add('hidden');
+                    imgEl.classList.remove('hidden');
+                };
+                imgEl.onerror = function() {
+                    if (loadingEl) loadingEl.classList.add('hidden');
+                    if (errorEl) errorEl.classList.remove('hidden');
+                };
+                imgEl.src = targetUrl;
+            }
+
+            openModal('modal-proof-preview');
+        }
+
+        function downloadQrisImage() {
+            const a = document.createElement('a');
+            a.href = QRIS_DOWNLOAD_URL;
+            a.target = '_blank';
+            a.download = 'QRIS_SPENTIG_KANTIN.jpg';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function togglePinVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (input && icon) {
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.className = 'fa-solid fa-eye-slash text-xs';
+                } else {
+                    input.type = 'password';
+                    icon.className = 'fa-solid fa-eye text-xs';
+                }
+            }
+        }
+
         // Katalog Voucher Default (stok: null mewakili stok yang belum ditarik dari Apps Script)
         let menuItems = [
             { id: 'vch-1000', name: 'Voucher Belanja', price: 1000, stock: null, icon: '🎫', category: 'kecil', borderClass: 'border-amber-200 bg-amber-50/20', textBrandClass: 'text-amber-800', priceClass: 'text-amber-700', btnClass: 'bg-amber-600 hover:bg-amber-700 text-white' },
@@ -679,109 +798,53 @@
             return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount || 0);
         }
 
-        function openModal(id) {
-            const modal = document.getElementById(id);
-            if (modal) modal.classList.remove('hidden');
-        }
-
-        function closeModal(id) {
-            const modal = document.getElementById(id);
-            if (modal) modal.classList.add('hidden');
-        }
-
-        function showToast(message, type = 'info') {
-            const container = document.getElementById('toast-container');
-            if (!container) return;
-
-            const toast = document.createElement('div');
-            const bgColor = type === 'success' ? 'bg-emerald-800 text-white' : type === 'error' ? 'bg-red-800 text-white' : 'bg-slate-800 text-white';
-            const icon = type === 'success' ? 'fa-circle-check text-emerald-300' : type === 'error' ? 'fa-circle-xmark text-red-300' : 'fa-circle-info text-blue-300';
-
-            toast.className = `${bgColor} px-4 py-3 rounded-2xl shadow-xl text-xs font-bold flex items-center gap-2.5 transition-all duration-300 pointer-events-auto max-w-xs border border-white/10`;
-            toast.innerHTML = `<i class="fa-solid ${icon} text-base"></i><span>${message}</span>`;
-
-            container.appendChild(toast);
-
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-2');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        function togglePinVisibility(inputId, iconId) {
-            const input = document.getElementById(inputId);
-            const icon = document.getElementById(iconId);
-            if (!input || !icon) return;
-
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.className = 'fa-solid fa-eye-slash text-xs text-emerald-600';
-            } else {
-                input.type = 'password';
-                icon.className = 'fa-solid fa-eye text-xs text-slate-400';
-            }
-        }
-
-        // 🖼️ POPUP BUKTI BAYAR TANPA KELUAR APLIKASI
-        function previewProof(url, buyerName) {
-            const modal = document.getElementById('modal-proof-preview');
-            const img = document.getElementById('proof-preview-img');
-            const loading = document.getElementById('proof-preview-loading');
-            const errorDiv = document.getElementById('proof-preview-error');
-            const title = document.getElementById('proof-modal-title');
-            const extLink = document.getElementById('proof-external-link');
-            const downloadBtn = document.getElementById('proof-download-btn');
-
-            if (!url) {
-                showToast('Bukti pembayaran tidak ditemukan!', 'error');
-                return;
-            }
-
-            title.innerText = `Bukti Transfer - ${buyerName || 'Siswa'}`;
-            extLink.href = url;
-            downloadBtn.href = url;
-
-            img.classList.add('hidden');
-            errorDiv.classList.add('hidden');
-            loading.classList.remove('hidden');
-
-            openModal('modal-proof-preview');
-
-            let displayUrl = url;
-            // Konversi Tautan Google Drive ke Thumbnail Gambar Langsung
-            if (url.includes('drive.google.com/file/d/')) {
-                const fileIdMatch = url.match(/\/d\/([^\/]+)/);
-                if (fileIdMatch && fileIdMatch[1]) {
-                    displayUrl = `https://lh3.googleusercontent.com/d/${fileIdMatch[1]}`;
-                }
-            } else if (url.includes('drive.google.com/open?id=')) {
-                const fileIdMatch = url.match(/id=([^&]+)/);
-                if (fileIdMatch && fileIdMatch[1]) {
-                    displayUrl = `https://lh3.googleusercontent.com/d/${fileIdMatch[1]}`;
-                }
-            }
-
-            img.onload = () => {
-                loading.classList.add('hidden');
-                img.classList.remove('hidden');
-            };
-
-            img.onerror = () => {
-                loading.classList.add('hidden');
-                img.classList.add('hidden');
-                errorDiv.classList.remove('hidden');
-            };
-
-            img.src = displayUrl;
-        }
-
-        // Helper merender rincian voucher menjadi badge fleksibel rapi agar tidak menumpuk di HP
-        function renderItemsBadges(summaryStr) {
-            if (!summaryStr) return '<span class="text-slate-400 font-normal">-</span>';
+        // FUNGSI OTOMATIS MEMASTIKAN NOMINAL SELALU TAMPIL
+        function enrichItemsSummary(summaryStr, totalAmount) {
+            if (!summaryStr) return '';
             const parts = summaryStr.split(',');
+            const priceMap = {
+                'vch-1000': 1000,
+                'vch-2000': 2000,
+                'vch-3000': 3000,
+                'vch-5000': 5000,
+                'vch-10000': 10000
+            };
+
+            return parts.map(part => {
+                let p = part.trim();
+                // Jika sudah ada tulisan Rp, langsung gunakan
+                if (/Rp\s*[\d.]+/i.test(p)) return p;
+
+                // Cek jika berisi ID seperti vch-1000
+                for (const [id, price] of Object.entries(priceMap)) {
+                    if (p.toLowerCase().includes(id)) {
+                        const qtyMatch = p.match(/\((\d+)x\)/);
+                        const qtyStr = qtyMatch ? ` (${qtyMatch[1]}x)` : '';
+                        return `Voucher Belanja ${formatRupiah(price)}${qtyStr}`;
+                    }
+                }
+
+                // Jika hanya tertulis "Voucher Belanja" tanpa nominal
+                if (p.toLowerCase().includes('voucher belanja')) {
+                    const qtyMatch = p.match(/\((\d+)x\)/);
+                    const qty = qtyMatch ? parseInt(qtyMatch[1]) : 1;
+                    if (parts.length === 1 && totalAmount && totalAmount > 0) {
+                        const unitPrice = Math.round(totalAmount / qty);
+                        return `Voucher Belanja ${formatRupiah(unitPrice)} (${qty}x)`;
+                    }
+                }
+
+                return p;
+            }).join(', ');
+        }
+
+        function renderItemsBadges(summaryStr, totalAmount) {
+            const enriched = enrichItemsSummary(summaryStr, totalAmount);
+            if (!enriched) return '<span class="text-slate-400 font-normal">-</span>';
+            const parts = enriched.split(',');
             return `<div class="flex flex-wrap gap-1 max-w-xs">` + parts.map(p => {
                 const trimmed = p.trim();
-                return `<span class="bg-slate-100 border border-slate-200/80 text-slate-800 text-[10px] font-extrabold px-2 py-0.5 rounded-lg whitespace-nowrap shadow-2xs">${trimmed}</span>`;
+                return `<span class="bg-emerald-50 border border-emerald-200/80 text-emerald-900 text-[11px] font-black px-2.5 py-1 rounded-xl whitespace-nowrap shadow-2xs">${trimmed}</span>`;
             }).join('') + `</div>`;
         }
 
@@ -793,7 +856,6 @@
                 const data = await res.json();
 
                 if (data.status === 'success') {
-                    // Update stok dari Apps Script
                     if (data.stock) {
                         menuItems.forEach(item => {
                             if (data.stock[item.id] !== undefined) {
@@ -805,9 +867,11 @@
                     if (data.orders && Array.isArray(data.orders)) {
                         orders = data.orders.map(o => {
                             const isRedeemed = (o.redeemStatus === 'Sudah Ditukar');
+                            const enriched = enrichItemsSummary(o.itemsSummary, o.totalAmount);
                             return {
                                 ...o,
-                                vouchers: generateVouchersListFromSummary(o.itemsSummary, o.id, isRedeemed)
+                                itemsSummary: enriched,
+                                vouchers: generateVouchersListFromSummary(enriched, o.id, isRedeemed, o.totalAmount)
                             };
                         });
                         localStorage.setItem('saras_orders', JSON.stringify(orders));
@@ -828,10 +892,11 @@
             }
         }
 
-        function generateVouchersListFromSummary(summaryStr, orderId, isRedeemed = false) {
+        function generateVouchersListFromSummary(summaryStr, orderId, isRedeemed = false, totalAmount = 0) {
             const list = [];
-            if (!summaryStr) return list;
-            const parts = summaryStr.split(',');
+            const enriched = enrichItemsSummary(summaryStr, totalAmount);
+            if (!enriched) return list;
+            const parts = enriched.split(',');
             parts.forEach((p, idx) => {
                 const name = p.split('(')[0].trim();
                 const qtyMatch = p.match(/\((\d+)x\)/);
@@ -923,8 +988,8 @@
                 }
 
                 if (badge) {
-                    badge.className = 'bg-purple-950 text-purple-200 border border-purple-800 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow-2xs';
-                    badge.innerHTML = `<i class="fa-solid fa-user-shield text-purple-400"></i><span>Manajemen</span>`;
+                    badge.className = 'bg-slate-900 text-cyan-300 border border-indigo-800 px-3 py-1.5 rounded-xl text-xs font-extrabold flex items-center gap-1.5 shadow-2xs';
+                    badge.innerHTML = `<i class="fa-solid fa-user-shield text-cyan-400"></i><span>Manajemen</span>`;
                 }
 
                 if (siswaNav) siswaNav.classList.add('hidden');
@@ -1131,12 +1196,12 @@
             if (tab === 'transactions') {
                 document.getElementById('view-manajemen-transactions')?.classList.remove('hidden');
                 const activeBtn = document.getElementById('manajemen-nav-btn-transactions');
-                if (activeBtn) activeBtn.className = 'py-2 sm:py-3 border-b-2 border-purple-400 text-purple-300 font-bold flex items-center gap-2 whitespace-nowrap';
+                if (activeBtn) activeBtn.className = 'py-2 sm:py-3 border-b-2 border-cyan-400 text-cyan-300 font-bold flex items-center gap-2 whitespace-nowrap';
                 renderMasterTransactions();
             } else if (tab === 'rekap') {
                 document.getElementById('view-manajemen-rekap')?.classList.remove('hidden');
                 const activeBtn = document.getElementById('manajemen-nav-btn-rekap');
-                if (activeBtn) activeBtn.className = 'py-2 sm:py-3 border-b-2 border-purple-400 text-purple-300 font-bold flex items-center gap-2 whitespace-nowrap';
+                if (activeBtn) activeBtn.className = 'py-2 sm:py-3 border-b-2 border-cyan-400 text-cyan-300 font-bold flex items-center gap-2 whitespace-nowrap';
                 renderMasterRekap();
             }
         }
@@ -1248,7 +1313,7 @@
                         <div class="flex items-center gap-3">
                             <span class="text-2xl">${item.icon}</span>
                             <div>
-                                <h4 class="font-extrabold text-xs text-slate-800">${item.name}</h4>
+                                <h4 class="font-extrabold text-xs text-slate-800">${item.name} (${formatRupiah(item.price)})</h4>
                                 <p class="text-[11px] text-emerald-700 font-black">${formatRupiah(item.price)} x ${item.qty} = ${formatRupiah(subtotal)}</p>
                             </div>
                         </div>
@@ -1336,6 +1401,11 @@
 
             const total = cart.reduce((acc, curr) => acc + (curr.price * curr.qty), 0);
             document.getElementById('qris-modal-amount').innerText = formatRupiah(total);
+            
+            // Atur gambar QRIS Tampilan 1
+            const displayImg = document.getElementById('qris-display-img');
+            if (displayImg) displayImg.src = QRIS_DISPLAY_URL;
+
             openModal('modal-qris');
         }
 
@@ -1377,7 +1447,7 @@
                 for (let i = 0; i < c.qty; i++) {
                     vouchersList.push({
                         id: `VCH-${Date.now()}-${Math.floor(Math.random()*1000)}`,
-                        name: c.name,
+                        name: `${c.name} ${formatRupiah(c.price)}`,
                         price: c.price,
                         icon: c.icon,
                         redeemed: false
@@ -1385,7 +1455,8 @@
                 }
             });
 
-            const itemsSummaryStr = cart.map(c => `${c.name} (${c.qty}x)`).join(', ');
+            // Menyertakan nominal harga pada rincian transaksi (misal: "Voucher Belanja Rp 1.000 (1x)")
+            const itemsSummaryStr = cart.map(c => `${c.name} ${formatRupiah(c.price)} (${c.qty}x)`).join(', ');
             const orderId = `ORD-${Date.now()}`;
 
             const newOrder = {
@@ -1404,7 +1475,6 @@
                 proofUrl: URL.createObjectURL(fileInput.files[0])
             };
 
-            // Potong stok lokal sementara jika data stok sudah dimuat
             cart.forEach(c => {
                 const menuItem = menuItems.find(m => m.id === c.id);
                 if (menuItem && menuItem.stock !== null && menuItem.stock !== undefined) {
@@ -1523,7 +1593,7 @@
                                 <span class="bg-emerald-100 text-emerald-900 px-2.5 py-0.5 rounded-md font-mono text-xs font-black">${o.referralCode}</span>
                                 <h4 class="font-extrabold text-sm text-slate-900 mt-1">${o.buyerName} (${o.buyerClass})</h4>
                                 <div class="text-[11px] text-slate-500 font-bold mt-1">${o.date}</div>
-                                <div class="mt-1.5">${renderItemsBadges(o.itemsSummary)}</div>
+                                <div class="mt-1.5">${renderItemsBadges(o.itemsSummary, o.totalAmount)}</div>
                             </div>
                             <div class="text-right self-start sm:self-auto">
                                 <p class="text-sm font-black text-emerald-700">${formatRupiah(o.totalAmount)}</p>
@@ -1539,7 +1609,7 @@
                                     <div class="flex items-center gap-2.5 min-w-0">
                                         <span class="text-xl shrink-0">${v.icon}</span>
                                         <div class="truncate">
-                                            <p class="font-bold text-xs text-slate-800 truncate">${v.name}</p>
+                                            <p class="font-black text-xs text-slate-800 truncate">${v.name}</p>
                                             <p class="text-[10px] text-slate-400 font-mono truncate">${v.id}</p>
                                         </div>
                                     </div>
@@ -1633,7 +1703,7 @@
                             <p class="text-xs font-black text-slate-800">${o.buyerName}</p>
                             <p class="text-[10px] text-slate-500 font-semibold">NISN: ${o.buyerNisn || '-'} • HP: ${o.buyerPhone}</p>
                         </td>
-                        <td class="p-3.5 text-xs font-bold text-slate-700">${renderItemsBadges(o.itemsSummary)}</td>
+                        <td class="p-3.5 text-xs font-bold text-slate-700">${renderItemsBadges(o.itemsSummary, o.totalAmount)}</td>
                         <td class="p-3.5 text-xs font-black text-emerald-700">${formatRupiah(o.totalAmount)}</td>
                         <td class="p-3.5">
                             <button onclick="previewProof('${o.proofUrl}', '${o.buyerName.replace(/'/g, "\\'")}')" class="text-xs text-blue-600 hover:text-blue-800 hover:underline font-bold flex items-center gap-1 bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200/80 transition">
@@ -1772,7 +1842,7 @@
                         <p class="text-xs font-black text-slate-800">${o.buyerName}</p>
                         <p class="text-[10px] text-slate-500 font-semibold">Kelas: ${o.buyerClass} • NISN: ${o.buyerNisn || '-'}</p>
                     </td>
-                    <td class="p-3.5 text-xs font-bold text-slate-700">${renderItemsBadges(o.itemsSummary)}</td>
+                    <td class="p-3.5 text-xs font-bold text-slate-700">${renderItemsBadges(o.itemsSummary, o.totalAmount)}</td>
                     <td class="p-3.5 text-xs font-black text-emerald-600">${formatRupiah(o.totalAmount)}</td>
                     <td class="p-3.5">
                         <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full ${o.paymentStatus === 'Sudah Bayar' ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-700'}">
